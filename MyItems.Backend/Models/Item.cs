@@ -1,4 +1,5 @@
-﻿namespace MyItems.Backend.Models
+﻿
+namespace MyItems.Backend.Models
 {
     public class Item
     {
