@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
 namespace MyItems.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Home : ControllerBase
+    [Authorize]
+    public class HomeController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public Home(AppDbContext context)
+        public HomeController(AppDbContext context)
         {
             _context = context;
         }

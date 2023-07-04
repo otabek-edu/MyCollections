@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyItems.Backend.Models;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -7,10 +11,12 @@ namespace MyItems.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Admin : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class AdminController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public Admin(AppDbContext context)
+
+        public AdminController(AppDbContext context)
         {
             _context = context;
         }
