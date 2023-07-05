@@ -1,6 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using MyItems.Backend.Dto;
+using MyItems.Backend.Models;
+using System.ComponentModel.DataAnnotations;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace MyItems.Backend.Controllers
 {
@@ -8,36 +15,99 @@ namespace MyItems.Backend.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        // GET: api/<Account>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly AppDbContext _context;
+        private readonly IPasswordHasher<LoginDto> _passwordHasher;
+
+        public AccountController(AppDbContext context, IPasswordHasher<LoginDto> passwordHasher)
         {
-            return new string[] { "value1", "value2" };
+            _context = context;
+            _passwordHasher = passwordHasher;
         }
 
-        // GET api/<Account>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<Account>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromBody] LoginDto model)
         {
+            if (model is null 
+                || model.Email is null 
+                || model.Password is null)
+                return BadRequest();
+
+            var emailValidation = new EmailAddressAttribute().IsValid(model.Email);
+
+            if (!emailValidation)
+                return BadRequest();
+
+            var emailExist = await _context.Users
+                .Where(x => x.Email == model.Email)
+                .ToListAsync();
+
+            if (emailExist.Count >= 1)
+                return Conflict("Email exist");
+
+            var passwordHash = _passwordHasher.HashPassword(model, model.Password);
+
+            var userUuid = Guid.NewGuid();
+
+            await _context.Users.AddAsync(new User
+            {
+                Id = userUuid,
+                FirstName = "FirstName",
+                LastName = "LastName",
+                Email = model.Email,
+                PasswordHash = passwordHash,
+                IsAdmin = false,
+                IsBlocked = false
+            });
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
-        // PUT api/<Account>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody]LoginDto model)
         {
-        }
+            if (model is null
+                || model.Email is null
+                || model.Password is null
+                || model.Email == string.Empty 
+                || model.Password == string.Empty)
+                return BadRequest();
 
-        // DELETE api/<Account>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == model.Email);
+
+            if (user is null)
+                return NotFound();
+
+            var passwordHash = _passwordHasher.VerifyHashedPassword(model, user.PasswordHash, model.Password);
+
+            if (passwordHash == PasswordVerificationResult.Failed)
+                return Unauthorized();
+
+            var claims = new List<Claim>()
+            { 
+                new Claim(ClaimTypes.Name, model.Email) 
+            };
+
+            if (user.IsAdmin)
+                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            else
+                claims.Add(new Claim(ClaimTypes.Role, "User"));
+            
+            var token = new JwtSecurityToken(
+                issuer: JwtData.ISSUER,
+                audience: JwtData.AUDIENCE,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(120),
+                signingCredentials: new SigningCredentials(
+                    JwtData.GetSymmetricSecurityKey(),
+                    SecurityAlgorithms.HmacSha256));
+
+            var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return Ok(encodedToken);
         }
     }
 }

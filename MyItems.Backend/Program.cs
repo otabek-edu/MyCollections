@@ -1,16 +1,67 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MyItems.Backend;
+using MyItems.Backend.Dto;
+using MyItems.Backend.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IPasswordHasher<LoginDto>, PasswordHasher<LoginDto>>();
+
 builder.Services.AddControllers();
+builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyItemsDb"));
 });
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My items API", Version = "v1" });
+
+    var securitySchema = new OpenApiSecurityScheme
+    {
+        Description = "Using the Authorization header with the Bearer scheme.",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = "Bearer"
+        }
+    };
+
+    c.AddSecurityDefinition("Bearer", securitySchema);
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+          {
+              { securitySchema, new[] { "Bearer" } }
+          });
+});
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = JwtData.ISSUER,
+            ValidAudience = JwtData.AUDIENCE,
+            IssuerSigningKey = JwtData.GetSymmetricSecurityKey()
+        };
+    });
 
 var app = builder.Build();
 
