@@ -1,4 +1,4 @@
-﻿namespace MyItems.Backend.Dto
+﻿namespace MyItems.Backend.Dtos
 {
     public class LoginDto
     {

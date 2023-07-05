@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyItems.Backend;
-using MyItems.Backend.Dto;
+using MyItems.Backend.Dtos;
 using MyItems.Backend.Models;
-using MyItems.Backend.Service;
+using MyItems.Backend.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
