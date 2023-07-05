@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using MyItems.Backend.Service;
 
 namespace MyItems.Backend.Controllers
 {
@@ -17,50 +18,23 @@ namespace MyItems.Backend.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IPasswordHasher<LoginDto> _passwordHasher;
+        private readonly AccountService _accountService;
 
-        public AccountController(AppDbContext context, IPasswordHasher<LoginDto> passwordHasher)
+        public AccountController(
+            AppDbContext context, 
+            IPasswordHasher<LoginDto> passwordHasher,
+            AccountService accountService)
         {
             _context = context;
             _passwordHasher = passwordHasher;
+            _accountService = accountService;
         }
 
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] LoginDto model)
         {
-            if (model is null 
-                || model.Email is null 
-                || model.Password is null)
-                return BadRequest();
-
-            var emailValidation = new EmailAddressAttribute().IsValid(model.Email);
-
-            if (!emailValidation)
-                return BadRequest();
-
-            var emailExist = await _context.Users
-                .Where(x => x.Email == model.Email)
-                .ToListAsync();
-
-            if (emailExist.Count >= 1)
-                return Conflict("Email exist");
-
-            var passwordHash = _passwordHasher.HashPassword(model, model.Password);
-
-            var userUuid = Guid.NewGuid();
-
-            await _context.Users.AddAsync(new User
-            {
-                Id = userUuid,
-                FirstName = "FirstName",
-                LastName = "LastName",
-                Email = model.Email,
-                PasswordHash = passwordHash,
-                IsAdmin = false,
-                IsBlocked = false
-            });
-
-            await _context.SaveChangesAsync();
+            var result = await _accountService.Register(model);
 
             return Ok();
         }
@@ -79,12 +53,12 @@ namespace MyItems.Backend.Controllers
             var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == model.Email);
 
             if (user is null)
-                return NotFound();
+                return NotFound("Email does not exist");
 
             var passwordHash = _passwordHasher.VerifyHashedPassword(model, user.PasswordHash, model.Password);
 
             if (passwordHash == PasswordVerificationResult.Failed)
-                return Unauthorized();
+                return Unauthorized("Email or Password does not exist!");
 
             var claims = new List<Claim>()
             { 

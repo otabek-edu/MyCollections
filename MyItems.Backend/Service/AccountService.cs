@@ -1,90 +1,86 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyItems.Backend.Dto;
+using MyItems.Backend.Models;
+using MyItems.Backend.Exceptions;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace MyItems.Backend.Service
 {
     public class AccountService
     {
-        private readonly MyItemsContext _context;
-        private readonly IPasswordHasher _passwordHasher;
+        private readonly AppDbContext _context;
+        private readonly IPasswordHasher<LoginDto> _passwordHasher;
 
-        public AccountService(AppDbContext context, IPasswordHasher passwordHasher)
+        public AccountService(AppDbContext context, IPasswordHasher<LoginDto> passwordHasher)
         {
             _context = context;
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<AccountResponse> RegisterAsync(RegisterRequest model)
+        public async Task<string> Register(LoginDto model)
         {
-            var account = await _context.Accounts.SingleOrDefaultAsync(x => x.Email == model.Email);
+            if (model is null
+                || model.Email is null
+                || model.Password is null)
+                throw new Exceptions.InvalidDataException("Invalid data!");
 
-            if (account != null)
-            {
-                throw new AppException("Email already exists");
-            }
+            var emailValidation = new EmailAddressAttribute().IsValid(model.Email);
 
-            account = new Account
+            if (!emailValidation)
+                throw new Exceptions.InvalidEmailException("Invalid Email!");
+
+            var emailExist = await _context.Users
+                .Where(x => x.Email == model.Email)
+                .ToListAsync();
+
+            if (emailExist.Count >= 1)
+                throw new InvalidEmailException("Email already exist");
+
+            var passwordHash = _passwordHasher.HashPassword(model, model.Password);
+
+            var userUuid = Guid.NewGuid();
+
+            await _context.Users.AddAsync(new User
             {
-                Id = Guid.NewGuid(),
+                Id = userUuid,
+                FirstName = "FirstName",
+                LastName = "LastName",
                 Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PasswordHash = _passwordHasher.Hash(model.Password)
-            };
+                PasswordHash = passwordHash,
+                IsAdmin = false,
+                IsBlocked = false
+            });
 
-            _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
-
-            return new AccountResponse(account);
         }
 
-        public async Task<AccountResponse> AuthenticateAsync(AuthenticateRequest model)
+        
+    }
+
+    public class SuccessDataResult<T> : Exception
+    {
+        public static IActionResult BadRequest()
         {
-            var account = await _context.Accounts.SingleOrDefaultAsync(x => x.Email == model.Email);
-
-            if (account == null || !_passwordHasher.Verify(model.Password, account.PasswordHash))
-            {
-                throw new AppException("Email or password is incorrect");
-            }
-
-            var response = new AccountResponse(account);
-            response.Token = _tokenService.GenerateToken(account);
-
-            return response;
+            return new BadRequestResult();
         }
 
-        public async Task<IEnumerable<AccountResponse>> GetAllAsync()
+        public static IActionResult Conflict(string message)
         {
-            var accounts = await _context.Accounts.ToListAsync();
-
-            return accounts.Select(x => new AccountResponse(x));
+            return new ConflictObjectResult(message);
         }
 
-        public async Task<AccountResponse> GetByIdAsync(Guid id)
+        public static IActionResult NotFound()
         {
-            var account = await _context.Accounts.FindAsync(id);
-
-            return new AccountResponse(account);
+            return new NotFoundResult();
         }
 
-        public async Task<AccountResponse> UpdateAsync(Guid id, UpdateRequest model)
+        public static IActionResult Unauthorized()
         {
-            var account = await _context.Accounts.FindAsync(id);
-
-            if (account == null)
-            {
-                throw new KeyNotFoundException("Account not found");
-            }
-
-            if (model.Email != account.Email && await _context.Accounts.AnyAsync(x => x.Email == model.Email))
-            {
-                throw new AppException($"Email '{model.Email}' is already taken");
-            }
-
-            account.FirstName = model.FirstName;
-            account.LastName = model.LastName;
-            account.Email = model.Email;
-
-            if (!string.IsNullOrWhiteSpace(model.Password))
+            return new UnauthorizedResult();
         }
     }
 }

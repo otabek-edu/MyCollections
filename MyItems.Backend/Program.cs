@@ -6,10 +6,12 @@ using Microsoft.OpenApi.Models;
 using MyItems.Backend;
 using MyItems.Backend.Dto;
 using MyItems.Backend.Models;
+using MyItems.Backend.Service;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<IPasswordHasher<LoginDto>, PasswordHasher<LoginDto>>();
 
 builder.Services.AddControllers();
