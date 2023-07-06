@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MyItems.Backend.Dtos;
 using MyItems.Backend.Models;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using MyItems.Backend.Results;
-using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -23,29 +21,38 @@ namespace MyItems.Backend.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<Result> Register(RegisterDto model)
+        private bool ValidateData(LoginDto model)
         {
             if (model is null
-                || model.Email is null
-                || model.Password is null)
-                return new ErrorResult("Invalid data!");
+                || model.Email == string.Empty
+                || model.Password == string.Empty)
+                return false;
+            return true;
+        }
 
-            var emailValidation = new EmailAddressAttribute().IsValid(model.Email);
-
+        private bool EmailValidation(string email)
+        {
+            var emailValidation = new EmailAddressAttribute().IsValid(email);
             if (!emailValidation)
-                return new ErrorResult("Invalid Email!");
+                return false;
+            return true;
+        }
 
+        private async Task<bool> EmailExistValidation(string email)
+        {
             var emailExist = await _context.Users
-                .Where(x => x.Email == model.Email)
+                .Where(x => x.Email == email)
                 .ToListAsync();
 
             if (emailExist.Count >= 1)
-                return new ErrorResult("Email already exist");
+                return false;
+            return true;
+        }
 
+        private async Task CreateAccount(RegisterDto model)
+        {
             var passwordHash = _passwordHasher.HashPassword(model, model.Password);
-
             var userUuid = Guid.NewGuid();
-
             await _context.Users.AddAsync(new User
             {
                 Id = userUuid,
@@ -58,32 +65,27 @@ namespace MyItems.Backend.Services
             });
 
             await _context.SaveChangesAsync();
-
-            return new SuccessResult("Account created!");
         }
 
-        public async Task<Result> Login(LoginDto model)
+        private async Task<User> GetUserByEmail(string email)
         {
-            if (model is null
-                || model.Email is null
-                || model.Password is null
-                || model.Email == string.Empty
-                || model.Password == string.Empty)
-                return new ErrorResult("Invalid data!");
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
+            return user;
+        }
 
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == model.Email);
+        private bool PasswordVerification(LoginDto model, string passwordHash)
+        {
+            var passwordVerification = _passwordHasher.VerifyHashedPassword(model, passwordHash, model.Password);
+            if (passwordVerification == PasswordVerificationResult.Failed)
+                return false;
+            return true;
+        }
 
-            if (user is null)
-                return new ErrorResult("Email does not exist");
-
-            var passwordHash = _passwordHasher.VerifyHashedPassword(model, user.PasswordHash, model.Password);
-
-            if (passwordHash == PasswordVerificationResult.Failed)
-                return new ErrorResult("Email or Password does not exist!");
-
+        private string GenerateToken(User user)
+        {
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, model.Email)
+                new Claim(ClaimTypes.Name, user.Email)
             };
 
             if (user.IsAdmin)
@@ -101,8 +103,42 @@ namespace MyItems.Backend.Services
                     SecurityAlgorithms.HmacSha256));
 
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return encodedToken;
+        }
 
-            return new SuccessResult(encodedToken);
+        public async Task<Result> Register(RegisterDto model)
+        {
+            if (!ValidateData(model))
+                return new ErrorResult("Invalid Email!");
+
+            if (model.FirstName == string.Empty || model.LastName == string.Empty)
+                return new ErrorResult("Invalid Name!");
+
+            if (!EmailValidation(model.Email))
+                return new ErrorResult("Invalid Email!");
+
+            if (!(await EmailExistValidation(model.Email)))
+                return new ErrorResult("Email already exist");
+
+            await CreateAccount(model);
+            return new SuccessResult("Account created!");
+        }
+
+        public async Task<Result> Login(LoginDto model)
+        {
+            if (!ValidateData(model))
+                return new ErrorResult("Invalid data!");
+
+            var user = await GetUserByEmail(model.Email);
+
+            if (user is null)
+                return new ErrorResult("Email does not exist");
+
+            if (!PasswordVerification(model, user.PasswordHash))
+                return new ErrorResult("Email or Password does not exist!");
+
+            var token = GenerateToken(user);
+            return new SuccessResult(token);
         }
     }
 }
