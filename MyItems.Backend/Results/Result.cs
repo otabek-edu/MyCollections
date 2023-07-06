@@ -8,7 +8,12 @@
             Message = message;
         }
 
+        public Result(bool success)
+        {
+            Success = success;
+        }
+
         public bool Success { get; }
-        public string Message { get; } = null!;
+        public string  Message { get; } = string.Empty;
     }
 }
