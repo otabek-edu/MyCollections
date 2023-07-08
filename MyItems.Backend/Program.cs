@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<IPasswordHasher<LoginDto>, PasswordHasher<LoginDto>>();
 
 builder.Services.AddControllers();

@@ -1,4 +1,6 @@
-﻿namespace MyItems.Backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyItems.Backend.Models
 {
     public class Collection
     {
@@ -7,9 +9,14 @@
         public required string Description { get; set; }
         public required string Theme { get; set; }
         public required string ImageUrl { get; set; }
+        
+        
+        public Guid UserId { get; set; }
+        public User? User { get; set; }
+ 
+        
+        public List<Item> Items { get; set; } = new();
+        public List<CustomProperty> CustomProperties { get; set; } = new();
 
-        public required int UserId { get; set; }
-        public User User { get; set; } = null!;
-        public List<Item>? Items { get; set; }
     }
 }

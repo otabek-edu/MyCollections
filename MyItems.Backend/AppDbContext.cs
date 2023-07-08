@@ -11,6 +11,7 @@ namespace MyItems.Backend
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Collection> Collections { get; set; }
         public DbSet<Item> Items { get; set; }
 
         // onmodel creating

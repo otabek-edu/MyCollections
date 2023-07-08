@@ -9,5 +9,7 @@
         public required string LastName { get; set; }
         public required bool IsAdmin { get; set; }
         public required bool IsBlocked { get; set; }
+        
+        List<Collection> Collections { get; set; } = new();
     }
 }
