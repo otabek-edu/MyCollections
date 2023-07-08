@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
+using Microsoft.EntityFrameworkCore;
+using MyItems.Backend.Models;
 
 namespace MyItems.Backend.Controllers
 {
@@ -17,9 +18,9 @@ namespace MyItems.Backend.Controllers
         }
 
         [HttpGet]
-        public IList Get()
+        public async Task<List<User>> Get()
         {
-            var users = _context.Users.ToList();
+            var users = await _context.Users.ToListAsync();
             return users;
         }
     }
