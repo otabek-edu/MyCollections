@@ -2,26 +2,27 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyItems.Backend.Models;
+using MyItems.Backend.Services;
 
 namespace MyItems.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class HomeController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly HomeService _homeService;
 
-        public HomeController(AppDbContext context)
+        public HomeController(HomeService homeService)
         {
-            _context = context;
+            _homeService = homeService;
         }
 
         [HttpGet]
-        public async Task<List<User>> Get()
+        public async Task<IActionResult> Get()
         {
-            var users = await _context.Users.ToListAsync();
-            return users;
+            var collections = await _homeService.GetCollections();
+
+            return Ok(collections);
         }
     }
 }

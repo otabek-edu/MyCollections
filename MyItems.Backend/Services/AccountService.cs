@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using MyItems.Backend.Dtos;
 using MyItems.Backend.Models;
 using MyItems.Backend.Results;
+using MyItems.Backend.ViewModel;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -70,6 +71,7 @@ namespace MyItems.Backend.Services
         private async Task<User> GetUserByEmail(string email)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
+
             return user;
         }
 
