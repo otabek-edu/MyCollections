@@ -7,6 +7,8 @@ using System.Security.Claims;
 
 namespace MyItems.Backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CollectionController : ControllerBase
     {
         private readonly CollectionService _collectionService;
