@@ -15,7 +15,9 @@ namespace MyItems.Backend.Services
 
         public async Task<Result> GetUser(Guid id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Include(c => c.Collections)
+                .FirstOrDefaultAsync(u => u.Id == id);
             
             if (user == null)
                 return new ErrorResult("User not found");

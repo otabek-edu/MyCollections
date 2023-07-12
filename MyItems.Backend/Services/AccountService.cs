@@ -87,7 +87,8 @@ namespace MyItems.Backend.Services
         {
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, user.Email)
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
             if (user.IsAdmin)

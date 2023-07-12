@@ -15,6 +15,7 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<AdminService>();
 builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<HomeService>();
+builder.Services.AddScoped<CollectionService>();
 builder.Services.AddScoped<IPasswordHasher<LoginDto>, PasswordHasher<LoginDto>>();
 
 builder.Services.AddControllers();
