@@ -10,7 +10,7 @@ namespace MyItems.Backend.Models
 
         public Guid CollectionId { get; set; }
         [JsonIgnore]
-        public Collection? Collection { get; set; }
+        public Collection? Collection { get; set; } = null!;
         
         public List<CustomPropertyValue> CustomPropertyValues { get; set; } = new();
     }

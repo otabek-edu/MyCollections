@@ -19,9 +19,16 @@ namespace MyItems.Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCollection(Guid id)
+        public async Task<IActionResult> GetCollections()
         {
-            var collection = await _collectionService.GetCollection(id);
+            var collection = await _collectionService.GetCollections();
+            return Ok(collection);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCollectionById(Guid id)
+        {
+            var collection = await _collectionService.GetCollectionById(id);
             return Ok(collection);
         }
 

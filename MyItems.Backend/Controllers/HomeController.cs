@@ -17,10 +17,26 @@ namespace MyItems.Backend.Controllers
             _homeService = homeService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("top")]
+        public async Task<IActionResult> GetCollections()
         {
-            var collections = await _homeService.GetCollections();
+            var collections = await _homeService.GetTopCollections();
+
+            return Ok(collections);
+        }
+
+        [HttpGet("recent")]
+        public async Task<IActionResult> GetRecentItems()
+        {
+            var recentItems = await _homeService.GetRecentItems();
+
+            return Ok(recentItems);
+        }
+
+        [HttpGet("search/{query}")]
+        public async Task<IActionResult> SearchCollections(string query)
+        {
+            var collections = await _homeService.SearchCollections(query);
 
             return Ok(collections);
         }

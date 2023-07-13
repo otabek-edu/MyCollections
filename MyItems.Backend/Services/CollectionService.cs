@@ -14,7 +14,7 @@ namespace MyItems.Backend.Services
             _context = context;
         }
 
-        public async Task<Result> GetCollection(Guid id)
+        public async Task<Result> GetCollectionById(Guid id)
         {
             var collection = await _context.Collections
                 .Include(x => x.Items)
@@ -26,6 +26,16 @@ namespace MyItems.Backend.Services
                 return new ErrorResult("Collection not found");
 
             return new SuccessDataResult<Collection>(collection);
+        }
+
+        public async Task<Result> GetCollections()
+        {
+            var collections = await _context.Collections.ToListAsync();
+
+            if (collections is null)
+                return new ErrorResult("Collections not found");
+
+            return new SuccessDataResult<List<Collection>>(collections);
         }
 
         public async Task<Result> CreateCollection(CollectionDto model, Guid userId)
@@ -66,19 +76,6 @@ namespace MyItems.Backend.Services
             await _context.SaveChangesAsync();
 
             return new SuccessResult();
-        }
-
-        public async Task<Result> GetItem(Guid id)
-        {
-            var item = await _context.Items
-                .Include(x => x.CustomPropertyValues)
-                    .ThenInclude(x => x.CustomProperty)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (item == null)
-                return new ErrorResult("Item not found");
-
-            return new SuccessDataResult<Item>(item);
         }
     }
 }
