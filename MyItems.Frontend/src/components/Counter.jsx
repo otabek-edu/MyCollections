@@ -6,6 +6,7 @@ const Counter = () => {
   return (
       <div>
         <h2>{likes}</h2>
+        <h4>{import.meta.env.VITE_KEY}</h4>
         <hr style={{maxWidth: "400px"}}/>
         <input
             type="number"

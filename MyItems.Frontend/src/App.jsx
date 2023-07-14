@@ -4,7 +4,6 @@ import Counter from "./components/Counter.jsx";
 
 function App() {
 
-
   return (
     <div>
       <h1>Hello world</h1>
