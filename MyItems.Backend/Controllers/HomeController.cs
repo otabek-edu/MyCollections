@@ -1,26 +1,44 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
+using Microsoft.EntityFrameworkCore;
+using MyItems.Backend.Models;
+using MyItems.Backend.Services;
 
 namespace MyItems.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class HomeController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly HomeService _homeService;
 
-        public HomeController(AppDbContext context)
+        public HomeController(HomeService homeService)
         {
-            _context = context;
+            _homeService = homeService;
         }
 
-        [HttpGet]
-        public IList Get()
+        [HttpGet("top")]
+        public async Task<IActionResult> GetCollections()
         {
-            var users = _context.Users.ToList();
-            return users;
+            var collections = await _homeService.GetTopCollections();
+
+            return Ok(collections);
+        }
+
+        [HttpGet("recent")]
+        public async Task<IActionResult> GetRecentItems()
+        {
+            var recentItems = await _homeService.GetRecentItems();
+
+            return Ok(recentItems);
+        }
+
+        [HttpGet("search/{query}")]
+        public async Task<IActionResult> SearchCollections(string query)
+        {
+            var collections = await _homeService.SearchCollections(query);
+
+            return Ok(collections);
         }
     }
 }

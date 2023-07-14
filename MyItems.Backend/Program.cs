@@ -4,12 +4,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyItems.Backend;
-using MyItems.Backend.Dto;
+using MyItems.Backend.Dtos;
 using MyItems.Backend.Models;
+using MyItems.Backend.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<ProfileService>();
+builder.Services.AddScoped<HomeService>();
+builder.Services.AddScoped<CollectionService>();
 builder.Services.AddScoped<IPasswordHasher<LoginDto>, PasswordHasher<LoginDto>>();
 
 builder.Services.AddControllers();
@@ -69,7 +75,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(
+    //c =>
+    //{
+    //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My items API v1");
+    //    //c.RoutePrefix = string.Empty;
+    //}
+    );
 }
 
 app.UseHttpsRedirection();

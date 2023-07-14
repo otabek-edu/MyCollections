@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyItems.Backend.Models;
+using MyItems.Backend.Services;
 using System.Security.Claims;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MyItems.Backend.Controllers
 {
@@ -14,18 +13,17 @@ namespace MyItems.Backend.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly AdminService _adminService;
 
-        public AdminController(AppDbContext context)
+        public AdminController(AdminService adminService)
         {
-            _context = context;
+            _adminService = adminService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _context.Users.ToListAsync();
-
+            var users = await _adminService.GetAllUsers();
             return Ok(users);
         }
 
@@ -33,88 +31,39 @@ namespace MyItems.Backend.Controllers
         [Route("BlockUser")]
         public async Task<IActionResult> BlockUser(Guid id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            user.IsBlocked = true;
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            var result = await _adminService.BlockUser(id);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("UnBlockUser")]
         public async Task<IActionResult> UnBlockUser(Guid id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            user.IsBlocked = false;
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            var result = await _adminService.UnBlockUser(id);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("SetAdmin")]
         public async Task<IActionResult> SetAdmin(Guid id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            user.IsAdmin = true;
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            var result = await _adminService.SetAdmin(id);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("UnSetAdmin")]
         public async Task<IActionResult> UnSetAdmin(Guid id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            user.IsAdmin = false;
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            var result = await _adminService.UnSetAdmin(id);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            var result = await _adminService.DeleteUser(id);
+            return Ok(result);
         }
     }
 }

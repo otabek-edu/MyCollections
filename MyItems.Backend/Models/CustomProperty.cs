@@ -2,16 +2,15 @@
 
 namespace MyItems.Backend.Models
 {
-    public class Item
+    public class CustomProperty
     {
         public Guid Id { get; set; }
-        public required string Name { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public required string TypeProperty { get; set; }
 
         public Guid CollectionId { get; set; }
         [JsonIgnore]
-        public Collection? Collection { get; set; } = null!;
-        
+        public Collection? Collection { get; set; }
+
         public List<CustomPropertyValue> CustomPropertyValues { get; set; } = new();
     }
 }
