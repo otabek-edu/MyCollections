@@ -389,3 +389,4 @@ MigrationBackup/
 FodyWeavers.xsd
 *.env
 /MyItems.Frontend/.env
+/MyItems.Frontend/.env

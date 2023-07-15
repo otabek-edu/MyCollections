@@ -30,7 +30,9 @@ namespace MyItems.Backend.Services
 
         public async Task<Result> GetCollections()
         {
-            var collections = await _context.Collections.ToListAsync();
+            var collections = await _context.Collections
+                .Take(5)
+                .ToListAsync();
 
             if (collections is null)
                 return new ErrorResult("Collections not found");

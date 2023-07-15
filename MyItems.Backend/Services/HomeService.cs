@@ -30,7 +30,7 @@ namespace MyItems.Backend.Services
             var recentItems = await _context.Items
                 .Include(i => i.Collection)
                 .OrderByDescending(i => i.CreatedAt)
-                .Take(5)
+                .Take(15)
                 .ToListAsync();
 
             return new SuccessDataResult<List<Item>>(recentItems);
