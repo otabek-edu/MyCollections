@@ -18,7 +18,7 @@ const TopCollections = () => {
   }, [])
 
   return (
-      <div className="topCollections ps-3 pt-2 pe-3 pb-3">
+      <div className="topCollections section ps-3 pt-2 pe-3 pb-3">
         <h4>Top 5 collections</h4>
         {collections.map((post) =>
             <Collection name={post.name} count={post.items.length} key={post.id}/>

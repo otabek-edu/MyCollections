@@ -10,44 +10,43 @@
 
 body {
   color: #333333;
-  background-color: #B3A9AE;
+  background-color: #CDBDA3;
+}
+
+.section {
+  border-radius: var(--radius);
+  background-color: #d9d9d9;
+  box-shadow:
+          inset 0 -3em 3em rgba(0,0,0,0.1),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
 
 .box {
-  background-color: #d9d9d9;
   height: 90vh;
-  border-radius: var(--radius);
   padding: 25px;
 }
 
 .searchBox {
-  background-color: #d9d9d9;
   height: 5vh;
-  border-radius: var(--radius);
   margin-bottom: 2vh;
+  border: none;
 }
 
 .topCollections {
-  background-color: #d9d9d9;
+  margin-bottom: 2vh;
   height: 29vh;
   border-radius: var(--radius) 5px 5px var(--radius);
-  margin-bottom: 2vh;
   overflow-y: scroll;
-
 }
 
 .recentlyItems {
-  background-color: #d9d9d9;
   height: 52vh;
   border-radius: var(--radius) 5px 5px var(--radius);
   overflow-y: scroll;
 }
 
-
-
-
-
-
+.auth {
+}
 
 
 

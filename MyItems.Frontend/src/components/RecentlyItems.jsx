@@ -16,14 +16,13 @@ const RecentlyItems = () => {
     const response = await axios.get(baseUrl + '/api/home/recent');
     setItem(response.data.data);
     console.log(response.data.data);
-
   }
   
   return (
-      <div className="recentlyItems ps-3 pt-2 pe-3 pb-3">
+      <div className="recentlyItems section ps-3 pt-2 pe-3 pb-3">
         <h4>Recently items</h4>
         {items.map((item) =>
-          <Item name={item.name} collection={item.collectionId} author={item.id}/>
+          <Item name={item.name} collection={item.collectionId} author={item.id} key={item.id}/>
         )}
       </div>
   );

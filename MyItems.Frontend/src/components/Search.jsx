@@ -5,7 +5,7 @@ const Search = () => {
       <div>
         <input
             type="search"
-            className="form-control searchBox"
+            className="form-control searchBox section"
             id="datatable-search-input"
             placeholder="Search"
         />
