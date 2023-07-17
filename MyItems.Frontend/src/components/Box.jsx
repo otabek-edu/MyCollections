@@ -23,9 +23,7 @@ export const Box = () => {
                 <Link className="btn btn-dark" to={'/register'}>Register</Link>
               </div>
         }
-        <hr/>
-
-
+        <hr />
 
       </div>
   );

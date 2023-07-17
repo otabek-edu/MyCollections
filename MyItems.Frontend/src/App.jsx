@@ -12,6 +12,7 @@ const App = () => {
     if (localStorage.getItem('auth')) {
       setIsAuth(true)
     }
+    console.log(import.meta.env.BASE_URL)
   }, [])
 
   return (
@@ -32,6 +33,10 @@ const App = () => {
             <Route path="/" element={<Home/>}  />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
+            <Route
+                path="*"
+                element={<Navigate to="/" replace />}
+            />
           </Routes> }
         </BrowserRouter>
       </AuthContext.Provider>
