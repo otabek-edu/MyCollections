@@ -5,6 +5,6 @@
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? ItemsCount { get; set; }
+        public int ItemsCount { get; set; }
     }
 }

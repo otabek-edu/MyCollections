@@ -17,14 +17,7 @@ namespace MyItems.Backend.Controllers
             _profileService = profileService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProfileForAdmin(Guid id)
-        {
-            var user = await _profileService.GetUser(id);
-            return Ok(user);
-        }
-
-        [HttpGet("my")]
+        [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetProfile()
         {
@@ -36,6 +29,13 @@ namespace MyItems.Backend.Controllers
             }
 
             return Ok(new ErrorResult("Not found!"));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserProfile(Guid id)
+        {
+            var user = await _profileService.GetUser(id);
+            return Ok(user);
         }
     }
 }

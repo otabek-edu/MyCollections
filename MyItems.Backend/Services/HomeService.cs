@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyItems.Backend.Models;
 using MyItems.Backend.Results;
+using MyItems.Backend.ViewModel;
 
 namespace MyItems.Backend.Services
 {
@@ -19,9 +20,16 @@ namespace MyItems.Backend.Services
                 .Include(c => c.Items)
                 .OrderByDescending(c => c.Items.Count)
                 .Take(5)
+                .Select(c => new CollectionViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    ItemsCount = c.Items.Count
+                })
                 .ToListAsync();
 
-            return new SuccessDataResult<List<Collection>>(topCollections);
+            return new SuccessDataResult<List<CollectionViewModel>>(topCollections);
         }
 
         public async Task<Result> GetRecentItems()
@@ -30,9 +38,18 @@ namespace MyItems.Backend.Services
                 .Include(i => i.Collection)
                 .OrderByDescending(i => i.CreatedAt)
                 .Take(15)
+                .Select(i => new ItemViewModel
+                {
+                    Id = i.Id,
+                    Name = i.Name,
+                    CollectionId = i.Collection.Id,
+                    CollectionName = i.Collection.Name,
+                    AuthorId = i.Collection.User.Id,
+                    Author = i.Collection.User.FirstName + " " + i.Collection.User.LastName
+                })
                 .ToListAsync();
 
-            return new SuccessDataResult<List<Item>>(recentItems);
+            return new SuccessDataResult<List<ItemViewModel>>(recentItems);
         }
 
         public async Task<Result> SearchCollections(string query)

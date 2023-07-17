@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyItems.Backend.Models;
 
@@ -6,6 +7,7 @@ namespace MyItems.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ItemController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -32,19 +34,6 @@ namespace MyItems.Backend.Controllers
             return Ok(item);
         }
 
-        [HttpGet]
-        [Route("recently")]
-        public async Task<IActionResult> RecentlyAdded()
-        {
-            var recentItems = await _context.Items
-                .Include(i => i.Collection)
-                .OrderByDescending(i => i.CreatedAt)
-                .Take(15)
-                .ToListAsync();
-
-            return Ok(recentItems);
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateItem(Item item)
         {
@@ -54,7 +43,7 @@ namespace MyItems.Backend.Controllers
             return Ok(item);
         }
 
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> UpdateItem(Guid id, Item item)
         {
             var existingItem = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
