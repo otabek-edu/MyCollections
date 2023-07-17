@@ -15,21 +15,17 @@ namespace MyItems.Backend.Controllers
             _accountService = accountService;
         }
 
-        [HttpPost]
-        [Route("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
             var result = await _accountService.Register(model);
-
             return Ok(result);
         }
 
-        [HttpPost]
-        [Route("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
             var result = await _accountService.Login(model);
-
             return Ok(result);
         }
     }
