@@ -6,7 +6,6 @@ namespace MyItems.Backend.Services
 {
     public class HomeService
     {
-
         private readonly AppDbContext _context;
 
         public HomeService(AppDbContext context)
@@ -42,7 +41,10 @@ namespace MyItems.Backend.Services
                 .Include(x => x.Items)
                     .ThenInclude(x => x.CustomPropertyValues)
                         .ThenInclude(x => x.CustomProperty)
-                .Where(x => x.Name.Contains(query))
+                .Where(x => x.Name.Contains(query)
+                || x.Description.Contains(query)
+                || x.Items.Any(item => item.Name.Contains(query)
+                ||item.CustomPropertyValues.Any(cpValue => cpValue.Value.Contains(query))))
                 .ToListAsync();
 
             return new SuccessDataResult<List<Collection>>(collections);

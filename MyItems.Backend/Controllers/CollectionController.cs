@@ -45,7 +45,5 @@ namespace MyItems.Backend.Controllers
             var result = await _collectionService.CreateCollection(collection, userId);
             return Ok(result);
         }
-
-
     }
 }

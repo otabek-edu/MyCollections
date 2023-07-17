@@ -140,6 +140,9 @@ namespace MyItems.Backend.Services
             if (!PasswordVerification(model, user.PasswordHash))
                 return new ErrorResult("Email or Password does not exist!");
 
+            if (user.IsBlocked == true)
+                return new ErrorResult("Your account is blocked!");
+
             var token = GenerateToken(user);
             return new SuccessResult(token);
         }
