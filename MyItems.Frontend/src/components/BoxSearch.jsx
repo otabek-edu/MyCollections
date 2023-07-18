@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = () => {
+const BoxSearch = () => {
   return (
       <div>
         <input
@@ -13,4 +13,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default BoxSearch;

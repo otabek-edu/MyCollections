@@ -1,15 +1,16 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
-const Item = ({name, collection, author}) => {
+const Item = ({name, collectionName, collectionId, author, authorId}) => {
   return (
       <div className="card mt-2">
         <div className="card-body">
-          <a href="#" className="link-offset-2-hover link-dark link-body-emphasis">{name}</a>
+          Item: <Link to={'/'} className="link-offset-2-hover link-dark link-body-emphasis">{name}</Link>
           <div className="card-link">
-            {collection}
+            Collection: <Link to={'/'} className="link-offset-2-hover link-dark link-body-emphasis">{collectionName}</Link>
           </div>
           <div className="card-footer">
-            <a href="/" className="link-offset-2-hover link-dark link-body-emphasis">{author}</a>
+            Author: <Link to={'/'} className="link-offset-2-hover link-dark link-body-emphasis">{author}</Link>
           </div>
         </div>
       </div>

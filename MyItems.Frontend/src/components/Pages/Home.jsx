@@ -1,8 +1,8 @@
 import React from 'react';
 import {Box} from "../Box.jsx";
-import Search from "../Search.jsx";
-import TopCollections from "../TopCollections.jsx";
-import RecentlyItems from "../RecentlyItems.jsx";
+import BoxSearch from "../BoxSearch.jsx";
+import BoxTopCollections from "../BoxTopCollections.jsx";
+import BoxRecentlyItems from "../BoxRecentlyItems.jsx";
 
 const Home = () => {
   return (
@@ -14,13 +14,13 @@ const Home = () => {
           <div className="col-sm-8">
             <div className="row">
               <div className="col-12">
-                <Search/>
+                <BoxSearch/>
               </div>
               <div className="col-12">
-                <TopCollections/>
+                <BoxTopCollections/>
               </div>
               <div className="col-12">
-                <RecentlyItems/>
+                <BoxRecentlyItems/>
               </div>
             </div>
           </div>

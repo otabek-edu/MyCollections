@@ -12,7 +12,6 @@ function Register() {
   const [success, setSuccess] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const {isAuth, setIsAuth} = useContext(AuthContext);
   let baseUrl = CONST.API_URL;
 
   const handleRegister = async (e) => {

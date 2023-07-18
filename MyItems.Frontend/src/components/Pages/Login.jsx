@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import CONST from "../../API/CONST.js";
 import {AuthContext} from "../../Context/AuthContext.js";
+import jwtDecode from "jwt-decode";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const {setIsAuth, setIsAdmin} = useContext(AuthContext);
   const baseUrl = CONST.API_URL;
-  const {isAuth, setIsAuth} = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,9 +29,16 @@ function Login() {
       else {
         console.log(response.data)
         setIsAuth(true)
-        localStorage.setItem("auth", "true");
+        localStorage.setItem("auth", "true")
+        localStorage.setItem("jwt", response.data.message)
+        let decodeToken = jwtDecode(response.data.message)
+        if (decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin') {
+          setIsAdmin(true)
+        }
+        else {
+          setIsAdmin(false)
+        }
       }
-
     } catch (error) {
       console.error('Error logging in:', error);
     }
