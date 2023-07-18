@@ -19,7 +19,7 @@ const BoxTopCollections = () => {
     <div className="topCollections section ps-3 pt-2 pe-3 pb-3">
       <h4>Top 5 collections</h4>
       {collections.map((post) =>
-          <Collection name={post.name} count={post.itemsCount} key={post.id}/>
+          <Collection name={post.name} count={post.itemsCount} id={post.id} key={post.id}/>
       )}
     </div>
   );

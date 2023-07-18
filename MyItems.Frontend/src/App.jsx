@@ -4,6 +4,7 @@ import Home from "./components/Pages/Home.jsx";
 import Login from "./components/Pages/Login.jsx";
 import Register from "./components/Pages/Register.jsx";
 import {AuthContext} from "./Context/AuthContext.js";
+import CollectionPage from "./components/Pages/CollectionPage.jsx";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -23,6 +24,7 @@ const App = () => {
           {isAuth ?
           <Routes>
             <Route path="/" element={<Home/>}  />
+            <Route path="/collection/:id" element={<CollectionPage/>}/>
             <Route
                 path="*"
                 element={<Navigate to="/" replace />}
@@ -31,6 +33,7 @@ const App = () => {
           :
           <Routes>
             <Route path="/" element={<Home/>}  />
+            <Route path="/collection/:id" element={<CollectionPage/>}/>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route

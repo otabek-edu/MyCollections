@@ -45,11 +45,14 @@ body {
   overflow-y: scroll;
 }
 
-.auth {
+.collectionBox {
+  height: 90vh;
+  border-radius: var(--radius) 5px 5px var(--radius);
+  overflow-y: scroll;
 }
 
-
-
+.auth {
+}
 
 
 

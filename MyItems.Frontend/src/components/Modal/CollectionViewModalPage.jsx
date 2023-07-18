@@ -31,6 +31,7 @@ const CollectionViewModalPage = () => {
               Save Changes
             </Button>
           </Modal.Footer>
+
         </Modal>
       </>
   );

@@ -7,7 +7,7 @@ const Item = ({name, collectionName, collectionId, author, authorId}) => {
         <div className="card-body">
           Item: <Link to={'/'} className="link-offset-2-hover link-dark link-body-emphasis">{name}</Link>
           <div className="card-link">
-            Collection: <Link to={'/'} className="link-offset-2-hover link-dark link-body-emphasis">{collectionName}</Link>
+            Collection: <Link to={`/collection/${collectionId}`} className="link-offset-2-hover link-dark link-body-emphasis">{collectionName}</Link>
           </div>
           <div className="card-footer">
             Author: <Link to={'/'} className="link-offset-2-hover link-dark link-body-emphasis">{author}</Link>

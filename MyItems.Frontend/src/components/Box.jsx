@@ -67,9 +67,7 @@ export const Box = () => {
                 <h6>Email: {user.email}</h6>
                 <hr/>
               </div>
-              :
-              <div>
-              </div>
+              : false
         }
       </div>
   );
