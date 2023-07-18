@@ -43,7 +43,7 @@ const CollectionPage = () => {
               <tr>
                 <th scope="row">Author:</th>
                 <td>
-                  <Link to={`/profile/${collection.userId}`} className='link-dark link-offset-2-hover'>{collection.userId}</Link>
+                  <Link to={`/profile/${collection.userId}`} className='link-dark link-offset-2-hover'>{collection.author}</Link>
                 </td>
               </tr>
               </tbody>

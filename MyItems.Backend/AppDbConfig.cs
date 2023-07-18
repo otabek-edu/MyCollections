@@ -37,7 +37,7 @@ namespace MyItems.Backend
                 Id = Guid.NewGuid(),
                 FirstName = "Admin",
                 LastName = "Admin",
-                Email = "otabek.pro@hotmail.com",
+                Email = "otabek.r743@gmail.com",
                 IsAdmin = true,
                 IsBlocked = false,
                 PasswordHash = "AQAAAAIAAYagAAAAEJsQhxvRZnTRqO2Jk9q/36tRhT1LD9BIAUsMuO2YrxZ4UlTc6QRjTD5Cbb7uA/sSsw=="
@@ -95,6 +95,7 @@ namespace MyItems.Backend
                 {
                     Id = uuid,
                     TypeProperty = types[faker.Random.Int(0, 3)],
+                    Name = faker.Company.CompanyName(),
                     CollectionId = currentCollection.Id
                 };
 

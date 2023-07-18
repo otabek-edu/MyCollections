@@ -2,6 +2,7 @@
 using MyItems.Backend.Dtos;
 using MyItems.Backend.Models;
 using MyItems.Backend.Results;
+using MyItems.Backend.ViewModel;
 
 namespace MyItems.Backend.Services
 {
@@ -20,12 +21,25 @@ namespace MyItems.Backend.Services
                 .Include(x => x.Items)
                     .ThenInclude(x => x.CustomPropertyValues)
                         .ThenInclude(x => x.CustomProperty)
+                .Select(c => new CollectionViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    ItemsCount = c.Items.Count,
+                    Theme = c.Theme,
+                    ImageUrl = c.ImageUrl,
+                    UserId = c.UserId,
+                    Author = c.User.FirstName + " " + c.User.LastName,
+                    Items = c.Items,
+                    CustomProperties = c.CustomProperties
+                })
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (collection == null)
                 return new ErrorResult("Collection not found");
 
-            return new SuccessDataResult<Collection>(collection);
+            return new SuccessDataResult<CollectionViewModel>(collection);
         }
 
         public async Task<Result> GetCollections()
