@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyItems.Backend.Models;
+using MyItems.Backend.ViewModel;
 
 namespace MyItems.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class ItemController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -24,6 +24,24 @@ namespace MyItems.Backend.Controllers
                 .Include(i => i.Collection)
                 .Include(i => i.CustomPropertyValues)
                     .ThenInclude(i => i.CustomProperty)
+                    .Select(i => new ItemViewModel
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        CollectionId = i.Collection.Id,
+                        CollectionName = i.Collection.Name,
+                        AuthorId = i.Collection.User.Id,
+                        Author = i.Collection.User.FirstName + " " + i.Collection.User.LastName,
+                        CreatedAt = i.CreatedAt.ToShortDateString(),
+                        CustomPropertyValues = i.CustomPropertyValues.Select(cpv => new CustomPropertyValueViewModel
+                        {
+                            Id = cpv.Id,
+                            Value = cpv.Value,
+                            CustomPropertyId = cpv.CustomProperty.Id,
+                            CustomPropertyName = cpv.CustomProperty.Name,
+                            CustomPropertyType = cpv.CustomProperty.TypeProperty
+                        }).ToList()
+                    })
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             if (item == null)
@@ -35,6 +53,7 @@ namespace MyItems.Backend.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateItem(Item item)
         {
             await _context.Items.AddAsync(item);
@@ -44,6 +63,7 @@ namespace MyItems.Backend.Controllers
         }
 
         [HttpPost("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateItem(Guid id, Item item)
         {
             var existingItem = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
@@ -62,6 +82,7 @@ namespace MyItems.Backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteItem(Guid id)
         {
             var existingItem = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);

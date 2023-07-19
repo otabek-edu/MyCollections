@@ -8,5 +8,8 @@
         public string? Name { get; set; }
         public string? CollectionName { get; set; }
         public string? Author { get; set; }
+        public string? CreatedAt { get; set; }
+        public List<CustomPropertyValueViewModel>? CustomPropertyValues { get; set; }
+
     }
 }

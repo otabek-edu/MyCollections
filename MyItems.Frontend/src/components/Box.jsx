@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import ProfileService from "../API/profile.service.js";
 import MyProfileModalPage from "./Modal/MyProfileModalPage.jsx";
 import CreateCollectionModalPage from "./Modal/CreateCollectionModalPage.jsx";
+import login from "./Pages/Login.jsx";
 
 export const Box = () => {
   const {isAuth, setIsAuth, isAdmin} = useContext(AuthContext);
@@ -24,6 +25,10 @@ export const Box = () => {
 
   async function fetchProfile() {
     const response = await ProfileService.fetchMyProfile()
+    if (response.status === 401) {
+      signOut();
+      return;
+    }
     let userResponse = response.data.data
     setUser({
       id: userResponse.id,

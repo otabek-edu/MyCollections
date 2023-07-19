@@ -7,16 +7,28 @@ export default class ProfileService {
 
   static async fetchMyProfile() {
     this.jwt = localStorage.getItem('jwt');
-    const response = await axios.get( this.baseUrl + "/api/profile", {
-      headers: {
-        Authorization: "Bearer " + this.jwt
-      }
-    });
-    return response;
+    try {
+      const response = await axios.get( this.baseUrl + "/api/profile", {
+        headers: {
+          Authorization: "Bearer " + this.jwt
+        }
+      })
+      return response;
+    } catch (error) {
+       if (error.request.status === 0) {
+         return {'status': 401}
+       }
+    }
   }
 
-  static async fetchRecentlyItems() {
-    const response = await axios.get(this.baseUrl + '/api/home/recent');
-    return response;
+  static async fetchProfileByUserId(id) {
+    try {
+      const response = await axios.get( this.baseUrl + `/api/profile/${id}`);
+      return response.data.data;
+    } catch (error) {
+      if (error.request.status === 0) {
+        return {'status': 401}
+      }
+    }
   }
 }

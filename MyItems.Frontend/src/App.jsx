@@ -5,6 +5,9 @@ import Login from "./components/Pages/Login.jsx";
 import Register from "./components/Pages/Register.jsx";
 import {AuthContext} from "./Context/AuthContext.js";
 import CollectionPage from "./components/Pages/CollectionPage.jsx";
+import ItemPage from "./components/Pages/ItemPage.jsx";
+import ProfilePage from "./components/Pages/ProfilePage.jsx";
+import jwtDecode from "jwt-decode";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -13,6 +16,10 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem('auth')) {
       setIsAuth(true)
+      let decodeToken = jwtDecode(localStorage.getItem('jwt'))
+      if (decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin') {
+        setIsAdmin(true)
+      }
     }
   }, [])
 
@@ -25,6 +32,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home/>}  />
             <Route path="/collection/:id" element={<CollectionPage/>}/>
+            <Route path="/item/:id" element={<ItemPage/>}/>
+            <Route path="/profile/:id" element={<ProfilePage/>}/>
             <Route
                 path="*"
                 element={<Navigate to="/" replace />}
@@ -34,6 +43,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home/>}  />
             <Route path="/collection/:id" element={<CollectionPage/>}/>
+            <Route path="/item/:id" element={<ItemPage/>}/>
+            <Route path="/profile/:id" element={<ProfilePage/>}/>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route

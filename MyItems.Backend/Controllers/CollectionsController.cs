@@ -9,11 +9,11 @@ namespace MyItems.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CollectionController : ControllerBase
+    public class CollectionsController : ControllerBase
     {
         private readonly CollectionService _collectionService;
 
-        public CollectionController(CollectionService collectionService)
+        public CollectionsController(CollectionService collectionService)
         {
             _collectionService = collectionService;
         }
@@ -22,6 +22,13 @@ namespace MyItems.Backend.Controllers
         public async Task<IActionResult> GetCollections()
         {
             var collection = await _collectionService.GetCollections();
+            return Ok(collection);
+        }
+
+        [HttpGet("user/{userID}")]
+        public async Task<IActionResult> GetCollections(Guid userID)
+        {
+            var collection = await _collectionService.GetCollectionById(userID);
             return Ok(collection);
         }
 

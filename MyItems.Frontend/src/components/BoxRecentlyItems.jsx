@@ -22,6 +22,7 @@ const BoxRecentlyItems = () => {
         {items.map((item) =>
           <Item
               name={item.name}
+              itemId={item.id}
               collectionName={item.collectionName}
               collectionId={item.collectionId}
               author={item.author}

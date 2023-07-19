@@ -14,6 +14,7 @@ const CollectionPage = () => {
       setCollection(collection)
       setItems(collection.items)
       setCustomProperty(collection.customProperties)
+      console.log(collection)
     }
 
     getCollectionById(id).catch(console.error)
@@ -24,6 +25,7 @@ const CollectionPage = () => {
       <div className="container mt-5 collectionBox section p-3">
         <Link to='/' className="btn btn-dark">Back</Link>
         <hr/>
+          <h3>Collection</h3>
         <div className="d-flex">
           <div>
             <table className="table section">

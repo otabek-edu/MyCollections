@@ -23,10 +23,17 @@ namespace MyItems.Backend.Services
                     Id = u.Id,
                     Email = u.Email,
                     FirstName = u.FirstName,
-                    LastName = u.LastName
+                    LastName = u.LastName,
+                    Collections = u.Collections.Select(c => new CollectionViewModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Description = c.Description,
+                        ItemsCount = c.Items.Count,
+                        Theme = c.Theme,
+                    }).ToList()
                 })
                 .FirstOrDefaultAsync();
-
 
             if (userViewModel == null)
                 return new ErrorResult("User not found");

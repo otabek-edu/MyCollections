@@ -23,11 +23,9 @@ function Login() {
       });
 
       if(response.data.success === false) {
-        console.log(response.data.message)
         setError(response.data.message)
       }
       else {
-        console.log(response.data)
         setIsAuth(true)
         localStorage.setItem("auth", "true")
         localStorage.setItem("jwt", response.data.message)
