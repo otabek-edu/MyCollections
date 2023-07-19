@@ -1,11 +1,60 @@
 import React, {useState} from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {Form} from "react-bootstrap";
+import CollectionFormBasic from "../CollectionFormBasic.jsx";
+import CollectionFormCustomField from "../CollectionFormCustomField.jsx";
+import collection from "../Collection.jsx";
+import CollectionService from "../../API/collection.service.js";
 
 const CreateCollectionModalPage = () => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const [customFields, setCustomFields] = useState([]);
+  const [collectionData, setCollectionData] = useState({
+    name: "",
+    description: "",
+    theme: "",
+    imageUrl: "",
+    customProperties: [{}]
+  });
+
+  const handleCreate = async () => {
+    collectionData.customProperties = customFields;
+    const response = await CollectionService.createCollection(collectionData)
+    if (response.success === true) {
+      console.log('success')
+    }
+  };
+
+  const handleAddCustomField = () => {
+    setCustomFields((prevFields) => [
+      ...prevFields,
+      { name: "", typeProperty: "string" },
+    ]);
+  };
+
+  const handleChangeCustomField = (index, field, value) => {
+    setCustomFields((prevFields) =>
+        prevFields.map((item, i) => (i === index ? { ...item, [field]: value } : item))
+    );
+    // console.log(customFields)
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCollectionData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleShow = () => setShow(true);
+
+  const handleClose = () => {
+    setCustomFields([])
+    setCollectionData({name: "", theme: "", description: "", imageUrl: ""})
+    setShow(false)
+  };
 
   return (
       <>
@@ -19,16 +68,25 @@ const CreateCollectionModalPage = () => {
           </Modal.Header>
 
           <Modal.Body>
-            <h1>Create collection modal page!</h1>
-            <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1> <h1>Create collection modal page!</h1>
+            <Form>
+              <CollectionFormBasic
+                  collectionData={collectionData}
+                  handleChange={handleChange}
+              />
+              <CollectionFormCustomField
+                customFields={customFields}
+                handleAddCustomField={handleAddCustomField}
+                handleChangeCustomField={handleChangeCustomField}
+              />
+            </Form>
           </Modal.Body>
 
           <Modal.Footer>
             <Button variant="outline-dark" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="outline-dark" onClick={handleClose}>
-              Save Changes
+            <Button variant="outline-dark" onClick={handleCreate}>
+              Create
             </Button>
           </Modal.Footer>
         </Modal>

@@ -19,9 +19,13 @@ namespace MyItems.Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCollections()
+        [Authorize]
+        public async Task<IActionResult> GetMyCollections()
         {
-            var collection = await _collectionService.GetCollections();
+            var userIdInSystem = Guid.Empty;
+            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userIdInSystem);
+            
+            var collection = await _collectionService.GetCollections(userIdInSystem);
             return Ok(collection);
         }
 
@@ -41,11 +45,22 @@ namespace MyItems.Backend.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateCollection([FromBody] CollectionDto collection, Guid userId)
+        public async Task<IActionResult> CreateCollection([FromBody] CollectionDto collection)
         {
             var userIdInSystem = Guid.Empty;
             Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userIdInSystem);
-            
+
+            var result = await _collectionService.CreateCollection(collection, userIdInSystem);
+            return Ok(result);
+        }
+
+        [HttpPost("forUser/{userId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateCollectionForUser([FromBody] CollectionDto collection, Guid userId)
+        {
+            var userIdInSystem = Guid.Empty;
+            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userIdInSystem);
+
             if (userIdInSystem != userId && User.FindFirstValue(ClaimTypes.Role) != "Admin")
                 return Ok(new ErrorResult(""));
 

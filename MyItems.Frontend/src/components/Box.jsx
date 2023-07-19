@@ -4,6 +4,7 @@ import {AuthContext} from "../Context/AuthContext.js";
 import {Link} from "react-router-dom";
 import MyProfileModalPage from "./Modal/MyProfileModalPage.jsx";
 import CreateCollectionModalPage from "./Modal/CreateCollectionModalPage.jsx";
+import AdminViewModalPage from "./Modal/AdminViewModalPage.jsx";
 
 export const Box = () => {
   const {isAuth, setIsAuth, isAdmin} = useContext(AuthContext);
@@ -24,7 +25,7 @@ export const Box = () => {
                 <MyProfileModalPage/>
                 <CreateCollectionModalPage/>
                 {
-                  isAdmin ? <button className="btn btn-dark w-10" onClick={signOut}>Admin</button> : false
+                  isAdmin ? <AdminViewModalPage/> : false
                 }
               </div>
               :
@@ -34,7 +35,6 @@ export const Box = () => {
               </div>
         }
         <hr />
-
       </div>
   );
 };

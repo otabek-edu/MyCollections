@@ -13,7 +13,7 @@ export default class ProfileService {
           Authorization: "Bearer " + this.jwt
         }
       })
-      return response;
+      return response.data;
     } catch (error) {
        if (error.request.status === 0) {
          return {'status': 401}
@@ -24,6 +24,7 @@ export default class ProfileService {
   static async fetchProfileByUserId(id) {
     try {
       const response = await axios.get( this.baseUrl + `/api/profile/${id}`);
+      console.log('test fetch')
       return response.data.data;
     } catch (error) {
       if (error.request.status === 0) {

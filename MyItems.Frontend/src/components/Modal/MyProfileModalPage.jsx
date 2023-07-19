@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ProfileService from "../../API/profile.service.js";
 import {AuthContext} from "../../Context/AuthContext.js";
+import Collection from "../Collection.jsx";
 
 
 const MyProfileModalPage = () => {
@@ -16,10 +17,11 @@ const MyProfileModalPage = () => {
     "firstName": "",
     "lastName": ""
   })
+  const [userCollections, setUserCollections] = useState([])
 
   const signOut = () => {
     setIsAuth(false)
-    setUser({})
+    setUser({id: '', email: '', firstName: '', lastName: ''})
     localStorage.removeItem('auth')
     localStorage.removeItem('jwt')
   }
@@ -27,23 +29,24 @@ const MyProfileModalPage = () => {
   useEffect(() => {
     async function fetchProfile() {
       const response = await ProfileService.fetchMyProfile()
-      if (response.status === 401) {
+      if (response.status === 401 || response.success === false) {
         signOut();
         return;
       }
-      let userResponse = response.data.data
+
       setUser({
-        id: userResponse.id,
-        firstName: userResponse.firstName,
-        lastName: userResponse.lastName,
-        email: userResponse.email
+        id: response.data.id,
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+        email: response.data.email
       })
+      setUserCollections(response.data.collections)
     }
 
-    if (localStorage.getItem('jwt')) {
+    if (localStorage.getItem('jwt') && show === true) {
       fetchProfile().then()
     }
-  }, [])
+  }, [show])
 
   return (
       <>
@@ -61,7 +64,14 @@ const MyProfileModalPage = () => {
               <h6>Name: {user.firstName}</h6>
               <h6>Last name: {user.lastName}</h6>
               <h6>Email: {user.email}</h6>
-              <hr/>
+            </div>
+            <hr/>
+            <div>
+              {
+                userCollections.map((collection) =>
+                    <Collection name={collection.name} count={collection.itemsCount} id={collection.id} key={collection.id}/>
+                )
+              }
             </div>
           </Modal.Body>
 

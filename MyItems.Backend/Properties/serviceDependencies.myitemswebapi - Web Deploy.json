@@ -3,9 +3,16 @@
     "mssql1": {
       "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/myitemswebapi/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsMyItemsDb_D0ACC5DE79",
       "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/myitemssqldb/databases/myitemsdb",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/myitemssqldb/databases/MyCollectionsDbProd",
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:MyItemsDb"
+    },
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/myitemswebapi/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDbPROD_179E3C5F8B",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/myitemssqldb/databases/MyCollectionsDbProd",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DbPROD"
     }
   }
 }

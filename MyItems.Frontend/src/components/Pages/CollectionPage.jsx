@@ -28,7 +28,7 @@ const CollectionPage = () => {
           <h3>Collection</h3>
         <div className="d-flex">
           <div>
-            <table className="table section">
+            <table className="table section" style={{width: 600}}>
               <tbody>
               <tr>
                 <th scope="row">Name</th>

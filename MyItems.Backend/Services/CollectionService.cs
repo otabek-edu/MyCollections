@@ -71,16 +71,26 @@ namespace MyItems.Backend.Services
         }
 
 
-        public async Task<Result> GetCollections()
+        public async Task<Result> GetCollections(Guid userId)
         {
-            var collections = await _context.Collections
-                .Take(5)
+            var topCollections = await _context.Collections
+                .Include(c => c.Items)
+                .ThenInclude(x => x.CustomPropertyValues)
+                .ThenInclude(x => x.CustomProperty)
+                .OrderByDescending(c => c.Items.Count)
+                .Select(c => new CollectionViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    ItemsCount = c.Items.Count,
+                    UserId = c.UserId,
+                    CustomProperties = c.CustomProperties
+                })
+                .Where(x => x.UserId == userId)
                 .ToListAsync();
 
-            if (collections is null)
-                return new ErrorResult("Collections not found");
-
-            return new SuccessDataResult<List<Collection>>(collections);
+            return new SuccessDataResult<List<CollectionViewModel>>(topCollections);
         }
 
         public async Task<Result> CreateCollection(CollectionDto model, Guid userId)
@@ -94,6 +104,17 @@ namespace MyItems.Backend.Services
                 ImageUrl = model.ImageUrl,
                 UserId = userId
             };
+
+            if (model.CustomProperties != null)
+                foreach (var customProperty in model.CustomProperties)
+                    collection.CustomProperties.Add(new CustomProperty
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = customProperty.Name,
+                        TypeProperty = customProperty.TypeProperty,
+                        CollectionId = collection.Id
+                    });
+            
 
             await _context.Collections.AddAsync(collection);
             await _context.SaveChangesAsync();

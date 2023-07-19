@@ -49,8 +49,8 @@ const ProfilePage = () => {
 
         <h4>User collections</h4>
           {
-            collections.map((post) =>
-                <Collection name={post.name} count={post.itemsCount} id={post.id} key={post.id}/>
+            collections.map((collection) =>
+                <Collection name={collection.name} count={collection.itemsCount} id={collection.id} key={collection.id}/>
             )
           }
       </div>
