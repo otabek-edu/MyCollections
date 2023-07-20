@@ -17,4 +17,13 @@ export default class ItemService {
     })
     return response.data;
   }
+
+  static async deleteItem(id) {
+    const response = await axios.delete(this.url + `/api/item/${id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('jwt')
+      }
+    })
+    return response.data;
+  }
 }

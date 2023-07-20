@@ -70,15 +70,11 @@ namespace MyItems.Backend.Controllers
                     CollectionId = itemDto.CollectionId,
                     CreatedAt = DateTime.Now
                 };
-                
-
-                
 
                 if (itemDto.CustomPropertyValues != null)
                 {
-                    var customPropertyValues = new List<CustomPropertyValue>();
                     foreach (var cpv in itemDto.CustomPropertyValues)
-                        customPropertyValues.Add(new CustomPropertyValue
+                        item.CustomPropertyValues.Add(new CustomPropertyValue
                         {
                             Id = Guid.NewGuid(),
                             Value = cpv.Value,
@@ -86,7 +82,6 @@ namespace MyItems.Backend.Controllers
                             ItemId = item.Id
                         });
                 }
-
 
                 await _context.Items.AddAsync(item);
                 await _context.SaveChangesAsync();

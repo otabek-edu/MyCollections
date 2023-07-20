@@ -11,7 +11,7 @@ const CreateItemModalPage = ({ collection, refreshmPage}) => {
     name: "",
     collectionId: collection.id,
     customPropertyValues: collection.customProperties.map((property) => ({
-      id: property.id,
+      customPropertyId: property.id,
       value: property.typeProperty === "bool" ? "false" : "",
     })),
   });
@@ -27,18 +27,18 @@ const CreateItemModalPage = ({ collection, refreshmPage}) => {
     console.log(response)
     console.log(itemData);
 
-    // handleClose();
+    handleClose();
   }
 
   const handleItemNameChange = (e) => {
     setItemData({ ...itemData, name: e.target.value });
   };
 
-  const handleCustomPropertyValueChange = (propertyId, value) => {
+  const handleCustomPropertyValueChange = (customPropertyId, value) => {
     setItemData((prevData) => ({
       ...prevData,
       customPropertyValues: prevData.customPropertyValues.map((item) =>
-          item.id === propertyId ? { ...item, value } : item
+          item.customPropertyId === customPropertyId ? { ...item, value } : item
       ),
     }));
   };
@@ -76,7 +76,7 @@ const CreateItemModalPage = ({ collection, refreshmPage}) => {
                           <Form.Control
                               type="text"
                               value={itemData.customPropertyValues.find(
-                                  (item) => item.id === property.id
+                                  (item) => item.customPropertyId === property.id
                               ).value}
                               onChange={(e) =>
                                   handleCustomPropertyValueChange(property.id, e.target.value)
@@ -87,7 +87,7 @@ const CreateItemModalPage = ({ collection, refreshmPage}) => {
                           <Form.Control
                               type="number"
                               value={itemData.customPropertyValues.find(
-                                  (item) => item.id === property.id
+                                  (item) => item.customPropertyId === property.id
                               ).value}
                               onChange={(e) =>
                                   handleCustomPropertyValueChange(property.id, e.target.value)
@@ -97,7 +97,7 @@ const CreateItemModalPage = ({ collection, refreshmPage}) => {
                       {property.typeProperty === "bool" && (
                           <Form.Select
                               value={itemData.customPropertyValues.find(
-                                  (item) => item.id === property.id
+                                  (item) => item.customPropertyId === property.id
                               ).value}
                               onChange={(e) =>
                                   handleCustomPropertyValueChange(property.id, e.target.value)

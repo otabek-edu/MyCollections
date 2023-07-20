@@ -1,14 +1,21 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import CollectionService from "../../API/collection.service.js";
 import CreateItemModalPage from "../Modal/CreateItemModalPage.jsx";
 import Loader from "../UI/Loader/Loader.jsx";
+import ItemService from "../../API/item.service.js";
 
 const CollectionPage = () => {
   const {id } = useParams()
   const [collection, setCollection] = useState({
+    name: '',
+    description: '',
+    theme: '',
+    author: '',
+    imageUrl: '',
     customProperties: [{}]
   })
+  const navigate = useNavigate();
   const [items, setItems] = useState([])
   const [customProperty, setCustomProperty] = useState([])
   const [isLoadingCollection,setIsLoadingCollection] = useState(false)
@@ -17,18 +24,26 @@ const CollectionPage = () => {
     setIsLoadingCollection(true)
 
     const collection = await CollectionService.getById(id)
+    if (collection === undefined) {
+      return navigate('/');
+    }
     setCollection(collection)
     setItems(collection.items)
-    setCustomProperty(collection.customProperties)
-    console.log(collection)
-
+    setCustomProperty(collection.customProperties.sort((a, b) => b.id.localeCompare(a.id)))
     setIsLoadingCollection(false)
-
   }
 
   useEffect( () => {
     getCollectionById().then()
   }, [])
+
+  async function deleteItem(itemId) {
+    setIsLoadingCollection(true)
+
+    console.log(itemId)
+
+    setIsLoadingCollection(false)
+  }
 
   return (
       <div className="container mt-5 collectionBox section p-3">
@@ -89,7 +104,8 @@ const CollectionPage = () => {
             <th>#</th>
             <th>Name</th>
             <th>CreatedAt</th>
-            {customProperty.map((property) => (
+            {customProperty
+                .map((property) => (
                 <th key={property.id}>{property.name}</th>
             ))}
           </tr>
@@ -102,17 +118,29 @@ const CollectionPage = () => {
                   <Link to={`/item/${item.id}`} className="link-dark">{item.name}</Link>
                 </td>
                 <td>{item.createdAt.slice(0, 10)}</td>
-                {item.customPropertyValues.map((value) => (
+                {item.customPropertyValues
+                    .sort((a, b) => a.id.localeCompare(b.id))
+                    .map((value) => (
                     <td key={value.id}>
-                      {value.value}
+                      {value ? value.value : ""}
                     </td>
                 ))}
+
+                {
+                  collection.userId === localStorage.getItem('id')
+                      ?
+                      <td>
+                        <button onClick={() => deleteItem(item.id)} className='btn btn-danger'>Delete</button>
+                      </td> : false
+                }
               </tr>
           ))}
           </tbody>
         </table>
       </div>
   );
+
+
 };
 
 export default CollectionPage;
