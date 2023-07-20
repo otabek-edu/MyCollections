@@ -24,25 +24,27 @@ const MyProfileModalPage = () => {
     setUser({id: '', email: '', firstName: '', lastName: ''})
     localStorage.removeItem('auth')
     localStorage.removeItem('jwt')
+    localStorage.removeItem('id')
+  }
+
+  async function fetchProfile() {
+    const response = await ProfileService.fetchMyProfile()
+    if (response.status === 401 || response.success === false) {
+      signOut();
+      return;
+    }
+
+    setUser({
+      id: response.data.id,
+      firstName: response.data.firstName,
+      lastName: response.data.lastName,
+      email: response.data.email
+    })
+    localStorage.setItem('id', response.data.id)
+    setUserCollections(response.data.collections)
   }
 
   useEffect(() => {
-    async function fetchProfile() {
-      const response = await ProfileService.fetchMyProfile()
-      if (response.status === 401 || response.success === false) {
-        signOut();
-        return;
-      }
-
-      setUser({
-        id: response.data.id,
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
-        email: response.data.email
-      })
-      setUserCollections(response.data.collections)
-    }
-
     if (localStorage.getItem('jwt') && show === true) {
       fetchProfile().then()
     }
@@ -69,7 +71,13 @@ const MyProfileModalPage = () => {
             <div>
               {
                 userCollections.map((collection) =>
-                    <Collection name={collection.name} count={collection.itemsCount} id={collection.id} key={collection.id}/>
+                    <Collection
+                        name={collection.name}
+                        isMyProfile={true}
+                        refreshModalPage={fetchProfile}
+                        count={collection.itemsCount}
+                        id={collection.id}
+                        key={collection.id}/>
                 )
               }
             </div>

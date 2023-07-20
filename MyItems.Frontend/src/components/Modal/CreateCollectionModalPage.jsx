@@ -6,6 +6,7 @@ import CollectionFormBasic from "../CollectionFormBasic.jsx";
 import CollectionFormCustomField from "../CollectionFormCustomField.jsx";
 import collection from "../Collection.jsx";
 import CollectionService from "../../API/collection.service.js";
+import ResultModalPage from "./ResultModalPage.jsx";
 
 const CreateCollectionModalPage = () => {
   const [show, setShow] = useState(false);
@@ -22,7 +23,7 @@ const CreateCollectionModalPage = () => {
     collectionData.customProperties = customFields;
     const response = await CollectionService.createCollection(collectionData)
     if (response.success === true) {
-      console.log('success')
+      handleClose();
     }
   };
 
@@ -37,7 +38,6 @@ const CreateCollectionModalPage = () => {
     setCustomFields((prevFields) =>
         prevFields.map((item, i) => (i === index ? { ...item, [field]: value } : item))
     );
-    // console.log(customFields)
   };
 
   const handleChange = (e) => {
@@ -52,8 +52,11 @@ const CreateCollectionModalPage = () => {
 
   const handleClose = () => {
     setCustomFields([])
-    setCollectionData({name: "", theme: "", description: "", imageUrl: ""})
+    setCollectionData({name: "", theme: "", description: "", imageUrl: "", customProperties: []})
     setShow(false)
+    return (
+        <ResultModalPage setView={true}/>
+    )
   };
 
   return (

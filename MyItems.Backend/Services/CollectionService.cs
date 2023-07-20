@@ -130,13 +130,13 @@ namespace MyItems.Backend.Services
             return new SuccessResult();
         }
 
-        public async Task<Result> DeleteCollection(Guid id)
+        public async Task<Result> DeleteCollection(Guid id, Guid userId)
         {
             var collection = await _context.Collections
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (collection == null)
-                return new ErrorResult("Collection not found");
+                return new ErrorResult("Сollection not deleted!");
 
             _context.Collections.Remove(collection);
             await _context.SaveChangesAsync();

@@ -8,10 +8,12 @@ import CollectionPage from "./components/Pages/CollectionPage.jsx";
 import ItemPage from "./components/Pages/ItemPage.jsx";
 import ProfilePage from "./components/Pages/ProfilePage.jsx";
 import jwtDecode from "jwt-decode";
+import Loader from "./components/UI/Loader/Loader.jsx";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
@@ -21,11 +23,17 @@ const App = () => {
         setIsAdmin(true)
       }
     }
+
+    setIsLoading(false)
   }, [])
+
+  if(isLoading) {
+    return <Loader/>
+  }
 
   return (
       <AuthContext.Provider value={
-        {isAuth, setIsAuth, isAdmin, setIsAdmin}
+        {isAuth, setIsAuth, isAdmin, setIsAdmin, isLoading, setIsLoading}
       }>
         <BrowserRouter>
           {isAuth ?

@@ -27,9 +27,9 @@ function Login() {
       }
       else {
         setIsAuth(true)
+        let decodeToken = jwtDecode(response.data.message)
         localStorage.setItem("auth", "true")
         localStorage.setItem("jwt", response.data.message)
-        let decodeToken = jwtDecode(response.data.message)
         if (decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin') {
           setIsAdmin(true)
         }

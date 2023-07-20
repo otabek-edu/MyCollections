@@ -62,7 +62,7 @@ namespace MyItems.Backend.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("users/{id}")]
+        [HttpDelete("users/{userId}")]
         public async Task<IActionResult> DeleteUser(Guid userId)
         {
             var result = await _adminService.DeleteUser(userId);

@@ -1,31 +1,56 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import CollectionService from "../../API/collection.service.js";
+import CreateItemModalPage from "../Modal/CreateItemModalPage.jsx";
+import Loader from "../UI/Loader/Loader.jsx";
 
 const CollectionPage = () => {
   const {id } = useParams()
-  const [collection, setCollection] = useState({})
+  const [collection, setCollection] = useState({
+    customProperties: [{}]
+  })
   const [items, setItems] = useState([])
   const [customProperty, setCustomProperty] = useState([])
+  const [isLoadingCollection,setIsLoadingCollection] = useState(false)
+
+  async function getCollectionById(){
+    setIsLoadingCollection(true)
+
+    const collection = await CollectionService.getById(id)
+    setCollection(collection)
+    setItems(collection.items)
+    setCustomProperty(collection.customProperties)
+    console.log(collection)
+
+    setIsLoadingCollection(false)
+
+  }
 
   useEffect( () => {
-    async function getCollectionById(id){
-      const collection = await CollectionService.getById(id)
-      setCollection(collection)
-      setItems(collection.items)
-      setCustomProperty(collection.customProperties)
-      console.log(collection)
-    }
-
-    getCollectionById(id).catch(console.error)
-
+    getCollectionById().then()
   }, [])
 
   return (
       <div className="container mt-5 collectionBox section p-3">
-        <Link to='/' className="btn btn-dark">Back</Link>
+        {
+          isLoadingCollection
+              ? <Loader/>
+              :
+              <>
+                <Link to='/' className="btn btn-dark">Back</Link>
+                {
+                  collection.userId === localStorage.getItem('id')
+                      ? <CreateItemModalPage
+                          collection={collection}
+                          refreshmPage={getCollectionById}
+                      /> : false
+                }
+              </>
+        }
+
         <hr/>
-          <h3>Collection</h3>
+        <h3>Collection</h3>
+
         <div className="d-flex">
           <div>
             <table className="table section" style={{width: 600}}>
@@ -45,7 +70,8 @@ const CollectionPage = () => {
               <tr>
                 <th scope="row">Author:</th>
                 <td>
-                  <Link to={`/profile/${collection.userId}`} className='link-dark link-offset-2-hover'>{collection.author}</Link>
+                  <Link to={`/profile/${collection.userId}`}
+                        className='link-dark link-offset-2-hover'>{collection.author}</Link>
                 </td>
               </tr>
               </tbody>
@@ -55,7 +81,6 @@ const CollectionPage = () => {
             <img src={collection.imageUrl} className='rounded float-end section w-75 h-75' alt=""/>
           </div>
         </div>
-
         <hr/>
 
         <table className="table section">
@@ -76,7 +101,7 @@ const CollectionPage = () => {
                 <td>
                   <Link to={`/item/${item.id}`} className="link-dark">{item.name}</Link>
                 </td>
-                <td>{item.createdAt.slice(0,10)}</td>
+                <td>{item.createdAt.slice(0, 10)}</td>
                 {item.customPropertyValues.map((value) => (
                     <td key={value.id}>
                       {value.value}

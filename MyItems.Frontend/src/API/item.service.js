@@ -9,4 +9,12 @@ export default class ItemService {
     return response.data;
   }
 
+  static async createItem(item) {
+    const response = await axios.post(this.url + `/api/item`, item, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('jwt')
+      }
+    })
+    return response.data;
+  }
 }

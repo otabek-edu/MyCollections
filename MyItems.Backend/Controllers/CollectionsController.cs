@@ -54,6 +54,17 @@ namespace MyItems.Backend.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteCollection(Guid id)
+        {
+            var userIdInSystem = Guid.Empty;
+            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userIdInSystem);
+
+            var collection = await _collectionService.DeleteCollection(id, userIdInSystem);
+            return Ok(collection);
+        }
+
         [HttpPost("forUser/{userId}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCollectionForUser([FromBody] CollectionDto collection, Guid userId)
