@@ -18,7 +18,7 @@ const BoxSearch = () => {
 
   return (
       <div>
-        <form action="" onSubmit={searchFunc}>
+        <form action="" onSubmit={searchFunc} className='d-flex align-items-baseline'>
           <input
               type="search"
               className="form-control searchBox section"
@@ -27,7 +27,12 @@ const BoxSearch = () => {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search"
           />
-          <button onClick={() => query === '' ? false : setModalShow(true)}>Search</button>
+          <button
+              onClick={() => query === '' ? false : setModalShow(true)}
+              className='btn btn-dark ms-2'
+          >
+            Search
+          </button>
         </form>
 
         <SearchResultModalPage
