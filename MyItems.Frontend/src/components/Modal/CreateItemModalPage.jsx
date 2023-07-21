@@ -25,7 +25,7 @@ const CreateItemModalPage = ({ collection, refreshmPage}) => {
   const handleCreate = async () => {
     const response = await ItemService.createItem(itemData)
     console.log(response)
-    console.log(itemData);
+    console.log(itemData)
 
     handleClose();
   }

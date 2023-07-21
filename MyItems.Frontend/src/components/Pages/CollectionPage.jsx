@@ -3,7 +3,6 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import CollectionService from "../../API/collection.service.js";
 import CreateItemModalPage from "../Modal/CreateItemModalPage.jsx";
 import Loader from "../UI/Loader/Loader.jsx";
-import ItemService from "../../API/item.service.js";
 
 const CollectionPage = () => {
   const {id } = useParams()
@@ -29,8 +28,9 @@ const CollectionPage = () => {
     }
     setCollection(collection)
     setItems(collection.items)
-    setCustomProperty(collection.customProperties.sort((a, b) => b.id.localeCompare(a.id)))
+    setCustomProperty(collection.customProperties)
     setIsLoadingCollection(false)
+
   }
 
   useEffect( () => {
@@ -51,8 +51,8 @@ const CollectionPage = () => {
           isLoadingCollection
               ? <Loader/>
               :
-              <>
-                <Link to='/' className="btn btn-dark">Back</Link>
+              <div className='d-flex'>
+                <Link to='/' className="btn btn-dark mx-2">Back</Link>
                 {
                   collection.userId === localStorage.getItem('id')
                       ? <CreateItemModalPage
@@ -60,13 +60,13 @@ const CollectionPage = () => {
                           refreshmPage={getCollectionById}
                       /> : false
                 }
-              </>
+              </div>
         }
 
         <hr/>
         <h3>Collection</h3>
 
-        <div className="d-flex">
+        <div className="d-flex w-auto h-auto">
           <div>
             <table className="table section" style={{width: 600}}>
               <tbody>
@@ -105,6 +105,7 @@ const CollectionPage = () => {
             <th>Name</th>
             <th>CreatedAt</th>
             {customProperty
+                .sort((a, b) => a.id.localeCompare(b.id))
                 .map((property) => (
                 <th key={property.id}>{property.name}</th>
             ))}
@@ -119,7 +120,7 @@ const CollectionPage = () => {
                 </td>
                 <td>{item.createdAt.slice(0, 10)}</td>
                 {item.customPropertyValues
-                    .sort((a, b) => a.id.localeCompare(b.id))
+                    .sort((a, b) => a.customPropertyId.localeCompare(b.customPropertyId))
                     .map((value) => (
                     <td key={value.id}>
                       {value ? value.value : ""}

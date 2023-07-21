@@ -7,8 +7,6 @@ namespace MyItems.Backend
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base (options)
         {
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
         }
 
         public DbSet<User> Users { get; set; }

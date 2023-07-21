@@ -13,6 +13,7 @@ export const Box = () => {
     setIsAuth(false)
     localStorage.removeItem('auth')
     localStorage.removeItem('jwt')
+    localStorage.removeItem('id')
   }
 
   return (

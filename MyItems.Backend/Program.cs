@@ -24,7 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyItemsDb2"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyItemsDb3"));
 });
 
 builder.Services.AddSwaggerGen(c =>
