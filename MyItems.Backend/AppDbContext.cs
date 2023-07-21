@@ -55,6 +55,7 @@ namespace MyItems.Backend
                 .HasForeignKey(cpv => cpv.ItemId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
             new AppDbConfig(modelBuilder).Configure();
         }
 

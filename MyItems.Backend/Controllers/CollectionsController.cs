@@ -18,17 +18,6 @@ namespace MyItems.Backend.Controllers
             _collectionService = collectionService;
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetMyCollections()
-        {
-            var userIdInSystem = Guid.Empty;
-            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userIdInSystem);
-            
-            var collection = await _collectionService.GetCollections(userIdInSystem);
-            return Ok(collection);
-        }
-
         [HttpGet("user/{userID}")]
         public async Task<IActionResult> GetCollections(Guid userID)
         {
@@ -40,6 +29,17 @@ namespace MyItems.Backend.Controllers
         public async Task<IActionResult> GetCollectionById(Guid id)
         {
             var collection = await _collectionService.GetCollectionById(id);
+            return Ok(collection);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetMyCollections()
+        {
+            var userIdInSystem = Guid.Empty;
+            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userIdInSystem);
+            
+            var collection = await _collectionService.GetCollections(userIdInSystem);
             return Ok(collection);
         }
 
@@ -65,7 +65,7 @@ namespace MyItems.Backend.Controllers
             return Ok(collection);
         }
 
-        [HttpPost("forUser/{userId}")]
+        [HttpPost("user/{userId}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCollectionForUser([FromBody] CollectionDto collection, Guid userId)
         {
