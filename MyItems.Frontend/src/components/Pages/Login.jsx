@@ -30,6 +30,7 @@ function Login() {
         let decodeToken = jwtDecode(response.data.message)
         localStorage.setItem("auth", "true")
         localStorage.setItem("jwt", response.data.message)
+        localStorage.setItem('id', decodeToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
         if (decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin') {
           setIsAdmin(true)
         }

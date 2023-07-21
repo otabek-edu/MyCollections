@@ -40,7 +40,7 @@ const MyProfileModalPage = () => {
       lastName: response.data.lastName,
       email: response.data.email
     })
-    localStorage.setItem('id', response.data.id)
+
     setUserCollections(response.data.collections)
   }
 
