@@ -5,9 +5,12 @@ import {Link} from "react-router-dom";
 import MyProfileModalPage from "./Modal/MyProfileModalPage.jsx";
 import CreateCollectionModalPage from "./Modal/CreateCollectionModalPage.jsx";
 import AdminViewModalPage from "./Modal/AdminViewModalPage.jsx";
+import ReactSwitch from "react-switch";
+import {ThemeContext} from "../Context/ThemeContext.js";
 
 export const Box = () => {
   const {isAuth, setIsAuth, isAdmin} = useContext(AuthContext);
+  const {theme, setTheme} = useContext(ThemeContext)
 
   const signOut = () => {
     setIsAuth(false)
@@ -16,12 +19,24 @@ export const Box = () => {
     localStorage.removeItem('id')
   }
 
+  function toggleTheme() {
+    const body = document.getElementById('body');
+      if (theme === "light") {
+        setTheme('dark')
+        body.setAttribute('class', 'bg-dark')
+      }
+      else {
+        setTheme('light')
+        body.setAttribute('class', '')
+      }
+  }
+
   return (
       <div className="box section">
         <h3 className="text-center">My collections</h3>
         {
           isAuth ?
-              <div className="d-flex justify-content-between">
+              <div className="d-flex flex-sm-wrap justify-content-between">
                 <button className="btn btn-dark w-10" onClick={signOut}>Logout</button>
                 <MyProfileModalPage/>
                 <CreateCollectionModalPage/>
@@ -36,6 +51,16 @@ export const Box = () => {
               </div>
         }
         <hr />
+        <div className='d-flex justify-content-evenly'>
+          <label> {theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+          <ReactSwitch
+              checkedIcon={false}
+              uncheckedIcon={false}
+              onChange={toggleTheme}
+              checked={theme === "dark"}/>
+
+        </div>
+        <hr/>
       </div>
   );
 };

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import CollectionService from "../../API/collection.service.js";
 import ItemService from "../../API/item.service.js";
+import MyLink from "../UI/Link/MyLink.jsx";
 
 const ItemPage = () => {
   const {id } = useParams()
@@ -37,12 +38,12 @@ const ItemPage = () => {
           </tr>
           <tr>
             <th scope="row">Collection:</th>
-            <td><Link to={`/collection/${item.collectionId}`} className='link-dark link-offset-2-hover'>{item.collectionName}</Link></td>
+            <td><MyLink to={`/collection/${item.collectionId}`} value={item.collectionName}/></td>
           </tr>
           <tr>
             <th scope="row">Author:</th>
             <td>
-              <Link to={`/profile/${item.authorId}`} className='link-dark link-offset-2-hover'>{item.author}</Link>
+              <MyLink to={`/profile/${item.authorId}`} value={item.author}/>
             </td>
           </tr>
           <tr>

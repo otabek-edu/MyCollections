@@ -39,36 +39,35 @@ const SearchResultModalPage = ({query, show, handleClose }) => {
   }, [show])
 
   return (
-      <Modal
-          show={show}
-          size="lg"
-          scrollable={true}
-      >
-        <Modal.Header>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Search result
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {
-            isLoading
-                ?
+        <Modal
+            show={show}
+            size="lg"
+        >
+          <Modal.Header>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Search result
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {
+              isLoading
+                  ?
                   <Loader/>
-                :
-                <div>
-                  {collections.map((collection) =>
-                    <Collection name={collection.name} id={collection.id} count={collection.itemsCount} key={collection.id}/>
-                  )}
-                  {items.map((item) =>
-                      <SimpleItem id={item.id} name={item.name}  key={item.id}/>
-                  )}
-                </div>
-          }
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant={"dark"} onClick={handleClose}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+                  :
+                  <div>
+                    {collections.map((collection) =>
+                        <Collection name={collection.name} id={collection.id} count={collection.itemsCount} key={collection.id}/>
+                    )}
+                    {items.map((item) =>
+                        <SimpleItem id={item.id} name={item.name}  key={item.id}/>
+                    )}
+                  </div>
+            }
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant={"dark"} onClick={handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
   );
 };
 

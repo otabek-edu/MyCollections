@@ -3,6 +3,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import CollectionService from "../../API/collection.service.js";
 import CreateItemModalPage from "../Modal/CreateItemModalPage.jsx";
 import Loader from "../UI/Loader/Loader.jsx";
+import MyLink from "../UI/Link/MyLink.jsx";
 
 const CollectionPage = () => {
   const {id } = useParams()
@@ -85,8 +86,9 @@ const CollectionPage = () => {
               <tr>
                 <th scope="row">Author:</th>
                 <td>
-                  <Link to={`/profile/${collection.userId}`}
-                        className='link-dark link-offset-2-hover'>{collection.author}</Link>
+                  {/*<Link to={`/profile/${collection.userId}`}*/}
+                  {/*      className='link-offset-2-hover link-dark link-body-emphasis'>{collection.author}</Link>*/}
+                  <MyLink to={`/profile/${collection.userId}`} value={collection.author}/>
                 </td>
               </tr>
               </tbody>
@@ -116,7 +118,7 @@ const CollectionPage = () => {
               <tr key={item.id}>
                 <th scope="row">{index + 1}</th>
                 <td>
-                  <Link to={`/item/${item.id}`} className="link-dark">{item.name}</Link>
+                  <MyLink to={`/item/${item.id}`} value={item.name}/>
                 </td>
                 <td>{item.createdAt.slice(0, 10)}</td>
                 {item.customPropertyValues

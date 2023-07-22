@@ -9,11 +9,14 @@ import ItemPage from "./components/Pages/ItemPage.jsx";
 import ProfilePage from "./components/Pages/ProfilePage.jsx";
 import jwtDecode from "jwt-decode";
 import Loader from "./components/UI/Loader/Loader.jsx";
+import {ThemeContext} from "./Context/ThemeContext.js";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true)
+  const [theme, setTheme] = useState('light')
+
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
@@ -32,36 +35,42 @@ const App = () => {
   }
 
   return (
+    <ThemeContext.Provider value={
+      {theme, setTheme}
+    }>
       <AuthContext.Provider value={
-        {isAuth, setIsAuth, isAdmin, setIsAdmin, isLoading, setIsLoading}
+        {isAuth, setIsAuth, isAdmin, setIsAdmin}
       }>
-        <BrowserRouter>
-          {isAuth ?
-          <Routes>
-            <Route path="/" element={<Home/>}  />
-            <Route path="/collection/:id" element={<CollectionPage/>}/>
-            <Route path="/item/:id" element={<ItemPage/>}/>
-            <Route path="/profile/:id" element={<ProfilePage/>}/>
-            <Route
-                path="*"
-                element={<Navigate to="/" replace />}
-            />
-          </Routes>
-          :
-          <Routes>
-            <Route path="/" element={<Home/>}  />
-            <Route path="/collection/:id" element={<CollectionPage/>}/>
-            <Route path="/item/:id" element={<ItemPage/>}/>
-            <Route path="/profile/:id" element={<ProfilePage/>}/>
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route
-                path="*"
-                element={<Navigate to="/" replace />}
-            />
-          </Routes> }
-        </BrowserRouter>
+        <div id={theme} data-bs-theme={theme}>
+          <BrowserRouter id={theme}>
+            {isAuth ?
+                <Routes>
+                  <Route path="/" element={<Home/>}  />
+                  <Route path="/collection/:id" element={<CollectionPage/>}/>
+                  <Route path="/item/:id" element={<ItemPage/>}/>
+                  <Route path="/profile/:id" element={<ProfilePage/>}/>
+                  <Route
+                      path="*"
+                      element={<Navigate to="/" replace />}
+                  />
+                </Routes>
+                :
+                <Routes>
+                  <Route path="/" element={<Home/>}  />
+                  <Route path="/collection/:id" element={<CollectionPage/>}/>
+                  <Route path="/item/:id" element={<ItemPage/>}/>
+                  <Route path="/profile/:id" element={<ProfilePage/>}/>
+                  <Route path="/login" element={<Login/>} />
+                  <Route path="/register" element={<Register/>} />
+                  <Route
+                      path="*"
+                      element={<Navigate to="/" replace />}
+                  />
+                </Routes> }
+          </BrowserRouter>
+        </div>
       </AuthContext.Provider>
+  </ThemeContext.Provider>
   );
 };
 
