@@ -4,20 +4,24 @@ import Modal from 'react-bootstrap/Modal';
 import ProfileService from "../../API/profile.service.js";
 import {AuthContext} from "../../Context/AuthContext.js";
 import Collection from "../Collection.jsx";
+import Loader from "../UI/Loader/Loader.jsx";
 
 
 const MyProfileModalPage = () => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [isLoading, setIsLoading] = useState(false)
   const {setIsAuth} = useContext(AuthContext);
+  const [userCollections, setUserCollections] = useState([])
   const [user, setUser] = useState({
     "id": "",
     "email": "",
     "firstName": "",
     "lastName": ""
   })
-  const [userCollections, setUserCollections] = useState([])
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   const signOut = () => {
     setIsAuth(false)
@@ -28,6 +32,7 @@ const MyProfileModalPage = () => {
   }
 
   async function fetchProfile() {
+    setIsLoading(true)
     const response = await ProfileService.fetchMyProfile()
     if (response.status === 401 || response.success === false) {
       signOut();
@@ -42,6 +47,8 @@ const MyProfileModalPage = () => {
     })
 
     setUserCollections(response.data.collections)
+
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -61,36 +68,43 @@ const MyProfileModalPage = () => {
             <Modal.Title>Profile</Modal.Title>
           </Modal.Header>
 
-          <Modal.Body>
-            <div className='row'>
-              <h6>Name: {user.firstName}</h6>
-              <h6>Last name: {user.lastName}</h6>
-              <h6>Email: {user.email}</h6>
-            </div>
-            <hr/>
-            <div>
-              {
-                userCollections.map((collection) =>
-                    <Collection
-                        name={collection.name}
-                        isMyProfile={true}
-                        refreshModalPage={fetchProfile}
-                        count={collection.itemsCount}
-                        id={collection.id}
-                        key={collection.id}/>
-                )
-              }
-            </div>
-          </Modal.Body>
+          {
+            isLoading ? <Loader/>
+                :
+                <>
+                  <Modal.Body>
+                    <div className='row'>
+                      <h6>Name: {user.firstName}</h6>
+                      <h6>Last name: {user.lastName}</h6>
+                      <h6>Email: {user.email}</h6>
+                    </div>
+                    <hr/>
+                    <div>
+                      {
+                        userCollections.map((collection) =>
+                            <Collection
+                                name={collection.name}
+                                isMyProfile={true}
+                                refreshModalPage={fetchProfile}
+                                count={collection.itemsCount}
+                                id={collection.id}
+                                key={collection.id}/>
+                        )
+                      }
+                    </div>
+                  </Modal.Body>
 
-          <Modal.Footer>
-            <Button variant="outline-dark" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="outline-dark" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
+                  <Modal.Footer>
+                    <Button variant="outline-dark" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="outline-dark" onClick={handleClose}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </>
+          }
+
         </Modal>
       </>
   );

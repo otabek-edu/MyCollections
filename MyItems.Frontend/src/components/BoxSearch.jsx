@@ -22,14 +22,13 @@ const BoxSearch = () => {
           <input
               type="search"
               className="form-control searchBox section"
-              id="datatable-search-input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search"
           />
           <button
               onClick={() => query === '' ? false : setModalShow(true)}
-              className='btn btn-dark ms-2'
+              className='btn btn-dark ms-2 section border-0'
           >
             Search
           </button>
@@ -41,6 +40,7 @@ const BoxSearch = () => {
             query={query}
             handleClose={handleClose}
         />
+
       </div>
   );
 };

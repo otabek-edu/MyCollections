@@ -10,25 +10,27 @@ import {ThemeContext} from "../Context/ThemeContext.js";
 
 export const Box = () => {
   const {isAuth, setIsAuth, isAdmin} = useContext(AuthContext);
-  const {theme, setTheme} = useContext(ThemeContext)
+  const {theme, setTheme, body} = useContext(ThemeContext)
 
   const signOut = () => {
     setIsAuth(false)
     localStorage.removeItem('auth')
     localStorage.removeItem('jwt')
     localStorage.removeItem('id')
+    localStorage.removeItem('isAdmin')
   }
 
   function toggleTheme() {
-    const body = document.getElementById('body');
-      if (theme === "light") {
-        setTheme('dark')
-        body.setAttribute('class', 'bg-dark')
-      }
-      else {
-        setTheme('light')
-        body.setAttribute('class', '')
-      }
+    if (theme === "light") {
+      setTheme('dark')
+      body.setAttribute('class', 'bg-dark')
+      localStorage.setItem('theme', 'dark')
+    }
+    else {
+      setTheme('light')
+      body.setAttribute('class', '')
+      localStorage.setItem('theme', 'light')
+    }
   }
 
   return (
@@ -58,7 +60,6 @@ export const Box = () => {
               uncheckedIcon={false}
               onChange={toggleTheme}
               checked={theme === "dark"}/>
-
         </div>
         <hr/>
       </div>

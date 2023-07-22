@@ -1,47 +1,43 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {AuthContext} from "./Context/AuthContext.js";
+import {ThemeContext} from "./Context/ThemeContext.js";
 import Home from "./components/Pages/Home.jsx";
 import Login from "./components/Pages/Login.jsx";
 import Register from "./components/Pages/Register.jsx";
-import {AuthContext} from "./Context/AuthContext.js";
 import CollectionPage from "./components/Pages/CollectionPage.jsx";
 import ItemPage from "./components/Pages/ItemPage.jsx";
 import ProfilePage from "./components/Pages/ProfilePage.jsx";
-import jwtDecode from "jwt-decode";
-import Loader from "./components/UI/Loader/Loader.jsx";
-import {ThemeContext} from "./Context/ThemeContext.js";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
   const [theme, setTheme] = useState('light')
 
-
   useEffect(() => {
-    if (localStorage.getItem('auth')) {
-      setIsAuth(true)
-      let decodeToken = jwtDecode(localStorage.getItem('jwt'))
-      if (decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin') {
-        setIsAdmin(true)
-      }
+    const localTheme = localStorage.getItem('theme')
+    if (localTheme === 'dark') {
+      body.setAttribute('class', 'bg-dark')
+      setTheme('dark')
+    } else {
+      body.setAttribute('class', '')
+      setTheme('light')
     }
 
-    setIsLoading(false)
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true)
+      localStorage.getItem('isAdmin') === 'true' ? setIsAdmin(true) : setIsAdmin(false)
+    }
   }, [])
-
-  if(isLoading) {
-    return <Loader/>
-  }
 
   return (
     <ThemeContext.Provider value={
-      {theme, setTheme}
+      {theme, setTheme, body: body}
     }>
       <AuthContext.Provider value={
         {isAuth, setIsAuth, isAdmin, setIsAdmin}
       }>
-        <div id={theme} data-bs-theme={theme}>
+        <div id={theme} data-bs-theme={theme} >
           <BrowserRouter id={theme}>
             {isAuth ?
                 <Routes>

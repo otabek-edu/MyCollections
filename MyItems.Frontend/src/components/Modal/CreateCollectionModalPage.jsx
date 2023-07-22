@@ -7,10 +7,12 @@ import CollectionFormCustomField from "../CollectionFormCustomField.jsx";
 import collection from "../Collection.jsx";
 import CollectionService from "../../API/collection.service.js";
 import ResultModalPage from "./ResultModalPage.jsx";
+import Loader from "../UI/Loader/Loader.jsx";
 
 const CreateCollectionModalPage = () => {
   const [show, setShow] = useState(false);
   const [customFields, setCustomFields] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
   const [collectionData, setCollectionData] = useState({
     name: "",
     description: "",
@@ -20,11 +22,14 @@ const CreateCollectionModalPage = () => {
   });
 
   const handleCreate = async () => {
+    setIsLoading(true)
     collectionData.customProperties = customFields;
     const response = await CollectionService.createCollection(collectionData)
     if (response.success === true) {
       handleClose();
     }
+
+    setIsLoading(false)
   };
 
   const handleAddCustomField = () => {
@@ -69,29 +74,34 @@ const CreateCollectionModalPage = () => {
           <Modal.Header closeButton>
             <Modal.Title>Create collection</Modal.Title>
           </Modal.Header>
-
-          <Modal.Body>
-            <Form>
-              <CollectionFormBasic
-                  collectionData={collectionData}
-                  handleChange={handleChange}
-              />
-              <CollectionFormCustomField
-                customFields={customFields}
-                handleAddCustomField={handleAddCustomField}
-                handleChangeCustomField={handleChangeCustomField}
-              />
-            </Form>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="outline-dark" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="outline-dark" onClick={handleCreate}>
-              Create
-            </Button>
-          </Modal.Footer>
+          {
+            isLoading
+              ? <Loader/>
+                :
+                <>
+                  <Modal.Body>
+                    <Form>
+                      <CollectionFormBasic
+                          collectionData={collectionData}
+                          handleChange={handleChange}
+                      />
+                      <CollectionFormCustomField
+                          customFields={customFields}
+                          handleAddCustomField={handleAddCustomField}
+                          handleChangeCustomField={handleChangeCustomField}
+                      />
+                    </Form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="outline-dark" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="outline-dark" onClick={handleCreate}>
+                      Create
+                    </Button>
+                  </Modal.Footer>
+                </>
+          }
         </Modal>
       </>
   );
