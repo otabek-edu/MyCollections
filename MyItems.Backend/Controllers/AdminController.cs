@@ -20,49 +20,52 @@ namespace MyItems.Backend.Controllers
             _adminService = adminService;
         }
 
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _adminService.GetAllUsers();
             return Ok(users);
         }
 
-        [HttpPut]
-        [Route("BlockUser")]
-        public async Task<IActionResult> BlockUser(Guid id)
+        [HttpGet("users/{userId}")]
+        public async Task<IActionResult> GetUserById(Guid userId)
         {
-            var result = await _adminService.BlockUser(id);
+            var user = await _adminService.GetUserById(userId);
+            return Ok(user);
+        }
+
+        [HttpPost("users/block/{userId}")]
+        public async Task<IActionResult> BlockUser(Guid userId)
+        {
+            var result = await _adminService.BlockUser(userId);
             return Ok(result);
         }
 
-        [HttpPut]
-        [Route("UnBlockUser")]
-        public async Task<IActionResult> UnBlockUser(Guid id)
+        [HttpPost("user/unBlock/{userId}")]
+        public async Task<IActionResult> UnBlockUser(Guid userId)
         {
-            var result = await _adminService.UnBlockUser(id);
+            var result = await _adminService.UnBlockUser(userId);
             return Ok(result);
         }
 
-        [HttpPut]
-        [Route("SetAdmin")]
-        public async Task<IActionResult> SetAdmin(Guid id)
+        [HttpPost("users/setAdmin/{userId}")]
+        public async Task<IActionResult> SetAdmin(Guid userId)
         {
-            var result = await _adminService.SetAdmin(id);
+            var result = await _adminService.SetAdmin(userId);
             return Ok(result);
         }
 
-        [HttpPut]
-        [Route("UnSetAdmin")]
-        public async Task<IActionResult> UnSetAdmin(Guid id)
+        [HttpPost("users/unSetAdmin/{userId}")]
+        public async Task<IActionResult> UnSetAdmin(Guid userId)
         {
-            var result = await _adminService.UnSetAdmin(id);
+            var result = await _adminService.UnSetAdmin(userId);
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(Guid id)
+        [HttpDelete("users/{userId}")]
+        public async Task<IActionResult> DeleteUser(Guid userId)
         {
-            var result = await _adminService.DeleteUser(id);
+            var result = await _adminService.DeleteUser(userId);
             return Ok(result);
         }
     }

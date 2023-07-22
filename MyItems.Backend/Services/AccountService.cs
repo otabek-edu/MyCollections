@@ -25,8 +25,8 @@ namespace MyItems.Backend.Services
         private bool ValidateData(LoginDto model)
         {
             if (model is null
-                || model.Email == string.Empty
-                || model.Password == string.Empty)
+                || model.Password == string.Empty
+                || model.Password.Length <= 5)
                 return false;
             return true;
         }
@@ -112,10 +112,10 @@ namespace MyItems.Backend.Services
         public async Task<Result> Register(RegisterDto model)
         {
             if (!ValidateData(model))
-                return new ErrorResult("Invalid Email!");
+                return new ErrorResult("Password must be longer than 6 characters!");
 
             if (model.FirstName == string.Empty || model.LastName == string.Empty)
-                return new ErrorResult("Invalid Name!");
+                return new ErrorResult("Invalid data!");
 
             if (!EmailValidation(model.Email))
                 return new ErrorResult("Invalid Email!");
@@ -130,7 +130,7 @@ namespace MyItems.Backend.Services
         public async Task<Result> Login(LoginDto model)
         {
             if (!ValidateData(model))
-                return new ErrorResult("Invalid data!");
+                return new ErrorResult("Password must be longer than 6 characters!");
 
             var user = await GetUserByEmail(model.Email);
 
@@ -139,6 +139,9 @@ namespace MyItems.Backend.Services
 
             if (!PasswordVerification(model, user.PasswordHash))
                 return new ErrorResult("Email or Password does not exist!");
+
+            if (user.IsBlocked == true)
+                return new ErrorResult("Your account is blocked!");
 
             var token = GenerateToken(user);
             return new SuccessResult(token);

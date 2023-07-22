@@ -24,7 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyItemsDb"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyItemsDb3"));
 });
 
 builder.Services.AddSwaggerGen(c =>
@@ -79,7 +79,7 @@ if (app.Environment.IsDevelopment())
     //c =>
     //{
     //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My items API v1");
-    //    //c.RoutePrefix = string.Empty;
+    //    c.RoutePrefix = string.Empty;
     //}
     );
 }

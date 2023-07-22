@@ -5,17 +5,35 @@ namespace MyItems.Backend
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base (options)
         {
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Collection> Collections { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<CustomProperty> CustomProperties { get; set; }
+        public DbSet<CustomPropertyValue> CustomPropertyValues { get; set; }
 
-        // onmodel creating
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CustomPropertyValue>()
+            .HasKey(cpv => cpv.Id);
+
+            modelBuilder.Entity<CustomPropertyValue>()
+                .Property(cpv => cpv.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<CustomPropertyValue>()
+                .HasOne(cpv => cpv.CustomProperty)
+                .WithMany(cp => cp.CustomPropertyValues)
+                .HasForeignKey(cpv => cpv.CustomPropertyId);
+
+            modelBuilder.Entity<CustomPropertyValue>()
+                .HasOne(cpv => cpv.Item)
+                .WithMany(item => item.CustomPropertyValues)
+                .HasForeignKey(cpv => cpv.ItemId);
+
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Collections)
                 .WithOne(c => c.User)
@@ -34,7 +52,9 @@ namespace MyItems.Backend
             modelBuilder.Entity<Item>()
                 .HasMany(i => i.CustomPropertyValues)
                 .WithOne(cpv => cpv.Item)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(cpv => cpv.ItemId)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
             new AppDbConfig(modelBuilder).Configure();
         }

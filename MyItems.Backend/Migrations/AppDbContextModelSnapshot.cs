@@ -56,93 +56,93 @@ namespace MyItems.Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d3f2bc65-bf24-4e42-931f-2bb524158001"),
-                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            ImageUrl = "https://picsum.photos/640/480/?image=528",
-                            Name = "Sleek Steel Pants",
-                            Theme = "Intelligent",
-                            UserId = new Guid("59705464-8fac-4b63-8dcd-e2d355fc6371")
-                        },
-                        new
-                        {
-                            Id = new Guid("b18cd452-10dc-40c5-b0fb-f36c38532544"),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            ImageUrl = "https://picsum.photos/640/480/?image=348",
-                            Name = "Refined Steel Keyboard",
-                            Theme = "Incredible",
-                            UserId = new Guid("a50a0c05-9a8e-4d37-a2a5-699faef074db")
-                        },
-                        new
-                        {
-                            Id = new Guid("65bbf142-d7cb-4584-b4e3-b370adee8289"),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            ImageUrl = "https://picsum.photos/640/480/?image=991",
-                            Name = "Refined Wooden Car",
-                            Theme = "Intelligent",
-                            UserId = new Guid("59705464-8fac-4b63-8dcd-e2d355fc6371")
-                        },
-                        new
-                        {
-                            Id = new Guid("f252614f-8355-4306-9b92-ff5e300effb6"),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            ImageUrl = "https://picsum.photos/640/480/?image=993",
-                            Name = "Awesome Steel Chair",
-                            Theme = "Tasty",
-                            UserId = new Guid("8a65f70f-4341-431e-a85f-ace7a76d3361")
-                        },
-                        new
-                        {
-                            Id = new Guid("88f035c3-752e-4cef-8b78-be1118067f25"),
+                            Id = new Guid("77df4d2f-b143-4194-b5e8-f0656999e63b"),
                             Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            ImageUrl = "https://picsum.photos/640/480/?image=1080",
-                            Name = "Incredible Wooden Computer",
-                            Theme = "Handcrafted",
-                            UserId = new Guid("4d9d26cc-0632-4cd6-aeb8-e2541eda0276")
+                            ImageUrl = "https://picsum.photos/640/480/?image=28",
+                            Name = "Gorgeous Concrete Chicken",
+                            Theme = "Ergonomic",
+                            UserId = new Guid("8e347306-99ce-4d37-abb8-2bdabf353cc7")
                         },
                         new
                         {
-                            Id = new Guid("23e12790-846f-4b35-b255-d69bcf3b226b"),
-                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            ImageUrl = "https://picsum.photos/640/480/?image=25",
-                            Name = "Small Metal Fish",
-                            Theme = "Fantastic",
-                            UserId = new Guid("10d8b4ae-f5d3-4de7-9c65-95cdf29e8f41")
+                            Id = new Guid("1812560e-7327-410f-843d-013301cfbd4c"),
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            ImageUrl = "https://picsum.photos/640/480/?image=496",
+                            Name = "Practical Granite Soap",
+                            Theme = "Intelligent",
+                            UserId = new Guid("8e347306-99ce-4d37-abb8-2bdabf353cc7")
                         },
                         new
                         {
-                            Id = new Guid("7cc56c20-554e-4231-8cfc-32478b91d14e"),
+                            Id = new Guid("75052dd1-b358-4a27-ba9d-52b803b8d4dc"),
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            ImageUrl = "https://picsum.photos/640/480/?image=842",
+                            Name = "Practical Soft Cheese",
+                            Theme = "Refined",
+                            UserId = new Guid("77873d29-1f12-4159-b8bd-0c5149f8f257")
+                        },
+                        new
+                        {
+                            Id = new Guid("80e89b88-ddf4-438d-87b5-9a73119dd626"),
                             Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            ImageUrl = "https://picsum.photos/640/480/?image=843",
-                            Name = "Gorgeous Rubber Mouse",
-                            Theme = "Practical",
-                            UserId = new Guid("a50a0c05-9a8e-4d37-a2a5-699faef074db")
+                            ImageUrl = "https://picsum.photos/640/480/?image=0",
+                            Name = "Sleek Rubber Chicken",
+                            Theme = "Licensed",
+                            UserId = new Guid("44e71406-5828-4460-af12-d5a8e26c1ba3")
                         },
                         new
                         {
-                            Id = new Guid("ea827064-7b18-4239-9b3e-1cc9c026dc43"),
+                            Id = new Guid("fb427abf-09ce-481c-ad68-1909d98c6474"),
                             Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            ImageUrl = "https://picsum.photos/640/480/?image=989",
-                            Name = "Small Wooden Cheese",
-                            Theme = "Handmade",
-                            UserId = new Guid("cb7ef5b1-00f2-4e48-8524-da383a17d9c2")
+                            ImageUrl = "https://picsum.photos/640/480/?image=689",
+                            Name = "Unbranded Cotton Gloves",
+                            Theme = "Ergonomic",
+                            UserId = new Guid("f896d352-27af-472b-876e-5ca6a7e90100")
                         },
                         new
                         {
-                            Id = new Guid("15bcd2f5-f1d9-473c-bcf1-5206093e7ed0"),
-                            Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            ImageUrl = "https://picsum.photos/640/480/?image=434",
-                            Name = "Small Fresh Bike",
-                            Theme = "Practical",
-                            UserId = new Guid("59705464-8fac-4b63-8dcd-e2d355fc6371")
+                            Id = new Guid("7a53ed42-6a05-458a-ae8e-1adf376232ff"),
+                            Description = "The Football Is Good For Training And Recreational Purposes",
+                            ImageUrl = "https://picsum.photos/640/480/?image=685",
+                            Name = "Ergonomic Frozen Car",
+                            Theme = "Handcrafted",
+                            UserId = new Guid("77873d29-1f12-4159-b8bd-0c5149f8f257")
                         },
                         new
                         {
-                            Id = new Guid("e159584b-8151-4811-bbae-498a7c093595"),
-                            Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            ImageUrl = "https://picsum.photos/640/480/?image=169",
-                            Name = "Fantastic Soft Mouse",
-                            Theme = "Unbranded",
-                            UserId = new Guid("cb7ef5b1-00f2-4e48-8524-da383a17d9c2")
+                            Id = new Guid("280ae474-e15b-407c-94ae-328d5c32f867"),
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            ImageUrl = "https://picsum.photos/640/480/?image=307",
+                            Name = "Handmade Frozen Soap",
+                            Theme = "Handcrafted",
+                            UserId = new Guid("bf466c09-3f00-4f16-a5cb-ff84fb7861e6")
+                        },
+                        new
+                        {
+                            Id = new Guid("17cadfc1-a011-41da-9367-0d2947f88f15"),
+                            Description = "The Football Is Good For Training And Recreational Purposes",
+                            ImageUrl = "https://picsum.photos/640/480/?image=422",
+                            Name = "Handcrafted Metal Ball",
+                            Theme = "Licensed",
+                            UserId = new Guid("0e59e516-c62a-444b-a5c3-e15a27d6055d")
+                        },
+                        new
+                        {
+                            Id = new Guid("380588c3-8cec-42f2-9030-d9a7f1d9cf92"),
+                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                            ImageUrl = "https://picsum.photos/640/480/?image=1076",
+                            Name = "Gorgeous Frozen Chicken",
+                            Theme = "Handcrafted",
+                            UserId = new Guid("bf466c09-3f00-4f16-a5cb-ff84fb7861e6")
+                        },
+                        new
+                        {
+                            Id = new Guid("fba61572-e08f-48a1-a92f-a0e9cc03db69"),
+                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                            ImageUrl = "https://picsum.photos/640/480/?image=792",
+                            Name = "Awesome Steel Car",
+                            Theme = "Licensed",
+                            UserId = new Guid("bf466c09-3f00-4f16-a5cb-ff84fb7861e6")
                         });
                 });
 
@@ -155,6 +155,10 @@ namespace MyItems.Backend.Migrations
                     b.Property<Guid>("CollectionId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TypeProperty")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -163,68 +167,78 @@ namespace MyItems.Backend.Migrations
 
                     b.HasIndex("CollectionId");
 
-                    b.ToTable("CustomProperty");
+                    b.ToTable("CustomProperties");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("267e62da-3277-437e-b079-f7d766527a4d"),
-                            CollectionId = new Guid("d3f2bc65-bf24-4e42-931f-2bb524158001"),
-                            TypeProperty = "boolean"
-                        },
-                        new
-                        {
-                            Id = new Guid("ab1f2876-cece-49ef-950e-d3027e4c9751"),
-                            CollectionId = new Guid("b18cd452-10dc-40c5-b0fb-f36c38532544"),
+                            Id = new Guid("f05ad174-b7a9-447b-a492-ce08a1ce8c84"),
+                            CollectionId = new Guid("77df4d2f-b143-4194-b5e8-f0656999e63b"),
+                            Name = "Trantow Inc",
                             TypeProperty = "dateTime"
                         },
                         new
                         {
-                            Id = new Guid("ab236aaf-1be6-4578-91e0-57bbc546b46f"),
-                            CollectionId = new Guid("65bbf142-d7cb-4584-b4e3-b370adee8289"),
+                            Id = new Guid("96f59deb-02bf-41a4-9010-53aa9afcdb88"),
+                            CollectionId = new Guid("1812560e-7327-410f-843d-013301cfbd4c"),
+                            Name = "Ward - Douglas",
+                            TypeProperty = "boolean"
+                        },
+                        new
+                        {
+                            Id = new Guid("3d354896-040e-4f84-8340-9616bd30f871"),
+                            CollectionId = new Guid("75052dd1-b358-4a27-ba9d-52b803b8d4dc"),
+                            Name = "Bruen, Buckridge and Bogisich",
+                            TypeProperty = "boolean"
+                        },
+                        new
+                        {
+                            Id = new Guid("bafb518c-78b7-4bc0-b659-edb089369f07"),
+                            CollectionId = new Guid("80e89b88-ddf4-438d-87b5-9a73119dd626"),
+                            Name = "Volkman - Koch",
+                            TypeProperty = "boolean"
+                        },
+                        new
+                        {
+                            Id = new Guid("64e23e76-13a5-4b89-892e-4828e5e16865"),
+                            CollectionId = new Guid("fb427abf-09ce-481c-ad68-1909d98c6474"),
+                            Name = "Shields - West",
+                            TypeProperty = "dateTime"
+                        },
+                        new
+                        {
+                            Id = new Guid("f8902c15-6441-49da-af15-3d83dd925778"),
+                            CollectionId = new Guid("7a53ed42-6a05-458a-ae8e-1adf376232ff"),
+                            Name = "Weimann - Predovic",
+                            TypeProperty = "number"
+                        },
+                        new
+                        {
+                            Id = new Guid("2e433225-c320-417d-b282-8a82d3280d96"),
+                            CollectionId = new Guid("280ae474-e15b-407c-94ae-328d5c32f867"),
+                            Name = "Bailey and Sons",
+                            TypeProperty = "dateTime"
+                        },
+                        new
+                        {
+                            Id = new Guid("6587a99d-8114-47e2-8955-86f8fbb476e3"),
+                            CollectionId = new Guid("17cadfc1-a011-41da-9367-0d2947f88f15"),
+                            Name = "Considine Inc",
                             TypeProperty = "string"
                         },
                         new
                         {
-                            Id = new Guid("324f36e4-e92b-4ef0-a007-dedaf07b7427"),
-                            CollectionId = new Guid("f252614f-8355-4306-9b92-ff5e300effb6"),
-                            TypeProperty = "boolean"
-                        },
-                        new
-                        {
-                            Id = new Guid("c668685b-2bbe-4fd0-9824-84f3888b15db"),
-                            CollectionId = new Guid("88f035c3-752e-4cef-8b78-be1118067f25"),
+                            Id = new Guid("27eb8cfe-39c9-4e7b-9aeb-116ba147fbd5"),
+                            CollectionId = new Guid("380588c3-8cec-42f2-9030-d9a7f1d9cf92"),
+                            Name = "Ward - Dickens",
                             TypeProperty = "dateTime"
                         },
                         new
                         {
-                            Id = new Guid("3f1917e0-d9d9-45c0-a17e-bd277a66bad3"),
-                            CollectionId = new Guid("23e12790-846f-4b35-b255-d69bcf3b226b"),
-                            TypeProperty = "boolean"
-                        },
-                        new
-                        {
-                            Id = new Guid("4e59dfe1-3da4-4165-b0e0-484d08cb3c6a"),
-                            CollectionId = new Guid("7cc56c20-554e-4231-8cfc-32478b91d14e"),
-                            TypeProperty = "boolean"
-                        },
-                        new
-                        {
-                            Id = new Guid("90417749-2f79-48da-a304-f11dbc2dc53b"),
-                            CollectionId = new Guid("ea827064-7b18-4239-9b3e-1cc9c026dc43"),
-                            TypeProperty = "string"
-                        },
-                        new
-                        {
-                            Id = new Guid("37517b7c-5413-46d6-b737-2dcf398166a5"),
-                            CollectionId = new Guid("15bcd2f5-f1d9-473c-bcf1-5206093e7ed0"),
+                            Id = new Guid("2f81bb1b-db00-4dc9-88f0-a51beb9bb41f"),
+                            CollectionId = new Guid("fba61572-e08f-48a1-a92f-a0e9cc03db69"),
+                            Name = "Hirthe - Keeling",
                             TypeProperty = "dateTime"
-                        },
-                        new
-                        {
-                            Id = new Guid("fa8becf1-49f9-4ad1-b754-92ac082b5896"),
-                            CollectionId = new Guid("e159584b-8151-4811-bbae-498a7c093595"),
-                            TypeProperty = "boolean"
                         });
                 });
 
@@ -234,10 +248,10 @@ namespace MyItems.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomPropertyId")
+                    b.Property<Guid?>("CustomPropertyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ItemId")
+                    b.Property<Guid?>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
@@ -250,78 +264,78 @@ namespace MyItems.Backend.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("CustomPropertyValue");
+                    b.ToTable("CustomPropertyValues");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("114c9de2-83c7-4f59-a39c-59c37afaf42d"),
-                            CustomPropertyId = new Guid("267e62da-3277-437e-b079-f7d766527a4d"),
-                            ItemId = new Guid("d35067de-1598-4a6b-943d-804c835b530e"),
-                            Value = "Small Cotton Chicken"
+                            Id = new Guid("0557fc86-26e8-480e-aed1-a64b453db59f"),
+                            CustomPropertyId = new Guid("f05ad174-b7a9-447b-a492-ce08a1ce8c84"),
+                            ItemId = new Guid("9de54a09-5879-4060-aeea-5ccd403198cf"),
+                            Value = "Practical Fresh Bacon"
                         },
                         new
                         {
-                            Id = new Guid("da611f50-ec0c-419a-81bd-c4819a479158"),
-                            CustomPropertyId = new Guid("ab1f2876-cece-49ef-950e-d3027e4c9751"),
-                            ItemId = new Guid("9e9475cd-496b-4638-a3b9-5b3055dfc495"),
-                            Value = "Handmade Plastic Table"
+                            Id = new Guid("cbbee14e-c972-4ee7-9ec1-2a38f27e618c"),
+                            CustomPropertyId = new Guid("96f59deb-02bf-41a4-9010-53aa9afcdb88"),
+                            ItemId = new Guid("b4da7705-33e2-4a2a-9af8-ade7cf8b4672"),
+                            Value = "Rustic Concrete Bike"
                         },
                         new
                         {
-                            Id = new Guid("03ccafe1-dee7-449a-8dc0-d7056e6a51a3"),
-                            CustomPropertyId = new Guid("ab236aaf-1be6-4578-91e0-57bbc546b46f"),
-                            ItemId = new Guid("93af4d22-ee7d-4d66-8468-f0d6c6d02c29"),
-                            Value = "Incredible Steel Fish"
+                            Id = new Guid("7205cec8-0468-4fab-930e-6293138aa631"),
+                            CustomPropertyId = new Guid("3d354896-040e-4f84-8340-9616bd30f871"),
+                            ItemId = new Guid("ffa6c91e-5c11-4811-94ee-30a66b48952b"),
+                            Value = "Tasty Granite Car"
                         },
                         new
                         {
-                            Id = new Guid("0c8c6ae8-5d60-4001-8396-6c78fa241771"),
-                            CustomPropertyId = new Guid("324f36e4-e92b-4ef0-a007-dedaf07b7427"),
-                            ItemId = new Guid("fa064a27-d6d7-48b5-9871-ead8cd4dc7bd"),
-                            Value = "Rustic Steel Bike"
+                            Id = new Guid("10938d8b-5e5b-400c-ab37-b77ae91bcc2a"),
+                            CustomPropertyId = new Guid("bafb518c-78b7-4bc0-b659-edb089369f07"),
+                            ItemId = new Guid("5d9e1b3c-e1eb-4c45-b060-de615fbb2802"),
+                            Value = "Practical Granite Soap"
                         },
                         new
                         {
-                            Id = new Guid("3552c213-fd7e-4862-b61c-c705006e0338"),
-                            CustomPropertyId = new Guid("c668685b-2bbe-4fd0-9824-84f3888b15db"),
-                            ItemId = new Guid("b7b24758-4f86-4d10-a576-83879fb25cda"),
-                            Value = "Incredible Frozen Tuna"
+                            Id = new Guid("65934031-3ca1-4796-a04b-ea7bbe5cb1b4"),
+                            CustomPropertyId = new Guid("64e23e76-13a5-4b89-892e-4828e5e16865"),
+                            ItemId = new Guid("d08a3072-8503-45ee-a7bd-0010b04e33dc"),
+                            Value = "Refined Rubber Chips"
                         },
                         new
                         {
-                            Id = new Guid("c621b611-a0c8-412c-8284-3a733ff3386b"),
-                            CustomPropertyId = new Guid("3f1917e0-d9d9-45c0-a17e-bd277a66bad3"),
-                            ItemId = new Guid("dba960fd-ea8a-466d-b7b8-3877e639da1b"),
-                            Value = "Gorgeous Frozen Shirt"
+                            Id = new Guid("2085c9bd-329f-4b58-9bc9-e325c5faec7f"),
+                            CustomPropertyId = new Guid("f8902c15-6441-49da-af15-3d83dd925778"),
+                            ItemId = new Guid("c26728fc-8ed7-4c9e-9d9b-49c2a7271346"),
+                            Value = "Licensed Metal Chair"
                         },
                         new
                         {
-                            Id = new Guid("fd1b6394-c0e2-440a-bc99-6ec0d61e7028"),
-                            CustomPropertyId = new Guid("4e59dfe1-3da4-4165-b0e0-484d08cb3c6a"),
-                            ItemId = new Guid("7f36e017-e629-4585-b350-ec7a6c11f6e0"),
-                            Value = "Handcrafted Wooden Chips"
+                            Id = new Guid("e73d21b1-5e42-43c2-b5b6-1ce85d3a195c"),
+                            CustomPropertyId = new Guid("2e433225-c320-417d-b282-8a82d3280d96"),
+                            ItemId = new Guid("78649ca1-b9a2-46ac-99d3-aaf14071f0a2"),
+                            Value = "Licensed Wooden Towels"
                         },
                         new
                         {
-                            Id = new Guid("4624f7d3-8c92-42b7-ba4e-4ece588d0297"),
-                            CustomPropertyId = new Guid("90417749-2f79-48da-a304-f11dbc2dc53b"),
-                            ItemId = new Guid("f4eecdec-b74a-4a09-a1ee-bb987329ff59"),
-                            Value = "Awesome Wooden Hat"
+                            Id = new Guid("5d52c54d-4f41-4ede-9404-a922f45af407"),
+                            CustomPropertyId = new Guid("6587a99d-8114-47e2-8955-86f8fbb476e3"),
+                            ItemId = new Guid("b9563f19-6d77-4e2a-b571-2658ac9ed01a"),
+                            Value = "Fantastic Frozen Tuna"
                         },
                         new
                         {
-                            Id = new Guid("b8f2ed5d-7709-4299-92bf-99d347f37876"),
-                            CustomPropertyId = new Guid("37517b7c-5413-46d6-b737-2dcf398166a5"),
-                            ItemId = new Guid("97f66092-f963-4047-84e4-108a3579505b"),
-                            Value = "Generic Rubber Sausages"
+                            Id = new Guid("154db740-488c-4f74-905f-347452207e98"),
+                            CustomPropertyId = new Guid("27eb8cfe-39c9-4e7b-9aeb-116ba147fbd5"),
+                            ItemId = new Guid("5d343bee-0770-4fdb-bfc5-03350d66ec4d"),
+                            Value = "Licensed Fresh Table"
                         },
                         new
                         {
-                            Id = new Guid("57545b46-14ca-4fbf-91ec-defbfb106235"),
-                            CustomPropertyId = new Guid("fa8becf1-49f9-4ad1-b754-92ac082b5896"),
-                            ItemId = new Guid("c3c22420-5e86-457c-835f-21fe9b77a6e5"),
-                            Value = "Intelligent Metal Bacon"
+                            Id = new Guid("8a016c89-fb78-4e72-85aa-eb437f532f0c"),
+                            CustomPropertyId = new Guid("2f81bb1b-db00-4dc9-88f0-a51beb9bb41f"),
+                            ItemId = new Guid("4d9d2cf8-8c47-43af-aff1-f5848aeddc70"),
+                            Value = "Sleek Wooden Sausages"
                         });
                 });
 
@@ -350,73 +364,73 @@ namespace MyItems.Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d35067de-1598-4a6b-943d-804c835b530e"),
-                            CollectionId = new Guid("d3f2bc65-bf24-4e42-931f-2bb524158001"),
-                            CreatedAt = new DateTime(2023, 3, 1, 5, 19, 6, 98, DateTimeKind.Local).AddTicks(2387),
-                            Name = "Awesome Fresh Shirt"
+                            Id = new Guid("9de54a09-5879-4060-aeea-5ccd403198cf"),
+                            CollectionId = new Guid("77df4d2f-b143-4194-b5e8-f0656999e63b"),
+                            CreatedAt = new DateTime(2022, 8, 30, 13, 8, 19, 897, DateTimeKind.Local).AddTicks(1064),
+                            Name = "Handmade Granite Salad"
                         },
                         new
                         {
-                            Id = new Guid("9e9475cd-496b-4638-a3b9-5b3055dfc495"),
-                            CollectionId = new Guid("b18cd452-10dc-40c5-b0fb-f36c38532544"),
-                            CreatedAt = new DateTime(2022, 9, 23, 23, 21, 18, 449, DateTimeKind.Local).AddTicks(3548),
-                            Name = "Practical Fresh Chips"
+                            Id = new Guid("b4da7705-33e2-4a2a-9af8-ade7cf8b4672"),
+                            CollectionId = new Guid("1812560e-7327-410f-843d-013301cfbd4c"),
+                            CreatedAt = new DateTime(2022, 11, 15, 13, 3, 40, 662, DateTimeKind.Local).AddTicks(2601),
+                            Name = "Licensed Fresh Sausages"
                         },
                         new
                         {
-                            Id = new Guid("93af4d22-ee7d-4d66-8468-f0d6c6d02c29"),
-                            CollectionId = new Guid("65bbf142-d7cb-4584-b4e3-b370adee8289"),
-                            CreatedAt = new DateTime(2022, 12, 16, 7, 29, 48, 624, DateTimeKind.Local).AddTicks(4497),
-                            Name = "Incredible Steel Pizza"
+                            Id = new Guid("ffa6c91e-5c11-4811-94ee-30a66b48952b"),
+                            CollectionId = new Guid("75052dd1-b358-4a27-ba9d-52b803b8d4dc"),
+                            CreatedAt = new DateTime(2023, 3, 16, 12, 42, 13, 976, DateTimeKind.Local).AddTicks(5181),
+                            Name = "Sleek Frozen Cheese"
                         },
                         new
                         {
-                            Id = new Guid("fa064a27-d6d7-48b5-9871-ead8cd4dc7bd"),
-                            CollectionId = new Guid("f252614f-8355-4306-9b92-ff5e300effb6"),
-                            CreatedAt = new DateTime(2022, 12, 20, 12, 15, 15, 370, DateTimeKind.Local).AddTicks(5879),
-                            Name = "Ergonomic Fresh Pizza"
+                            Id = new Guid("5d9e1b3c-e1eb-4c45-b060-de615fbb2802"),
+                            CollectionId = new Guid("80e89b88-ddf4-438d-87b5-9a73119dd626"),
+                            CreatedAt = new DateTime(2023, 4, 3, 5, 49, 13, 919, DateTimeKind.Local).AddTicks(689),
+                            Name = "Gorgeous Soft Shoes"
                         },
                         new
                         {
-                            Id = new Guid("b7b24758-4f86-4d10-a576-83879fb25cda"),
-                            CollectionId = new Guid("88f035c3-752e-4cef-8b78-be1118067f25"),
-                            CreatedAt = new DateTime(2023, 6, 9, 5, 24, 0, 484, DateTimeKind.Local).AddTicks(1828),
-                            Name = "Ergonomic Concrete Ball"
+                            Id = new Guid("d08a3072-8503-45ee-a7bd-0010b04e33dc"),
+                            CollectionId = new Guid("fb427abf-09ce-481c-ad68-1909d98c6474"),
+                            CreatedAt = new DateTime(2023, 3, 26, 2, 8, 43, 142, DateTimeKind.Local).AddTicks(5819),
+                            Name = "Fantastic Plastic Pants"
                         },
                         new
                         {
-                            Id = new Guid("dba960fd-ea8a-466d-b7b8-3877e639da1b"),
-                            CollectionId = new Guid("23e12790-846f-4b35-b255-d69bcf3b226b"),
-                            CreatedAt = new DateTime(2022, 12, 17, 22, 30, 33, 695, DateTimeKind.Local).AddTicks(2762),
-                            Name = "Gorgeous Frozen Mouse"
+                            Id = new Guid("c26728fc-8ed7-4c9e-9d9b-49c2a7271346"),
+                            CollectionId = new Guid("7a53ed42-6a05-458a-ae8e-1adf376232ff"),
+                            CreatedAt = new DateTime(2022, 10, 15, 6, 31, 32, 150, DateTimeKind.Local).AddTicks(9640),
+                            Name = "Awesome Plastic Chair"
                         },
                         new
                         {
-                            Id = new Guid("7f36e017-e629-4585-b350-ec7a6c11f6e0"),
-                            CollectionId = new Guid("7cc56c20-554e-4231-8cfc-32478b91d14e"),
-                            CreatedAt = new DateTime(2022, 8, 31, 23, 56, 35, 67, DateTimeKind.Local).AddTicks(5636),
-                            Name = "Incredible Metal Gloves"
+                            Id = new Guid("78649ca1-b9a2-46ac-99d3-aaf14071f0a2"),
+                            CollectionId = new Guid("280ae474-e15b-407c-94ae-328d5c32f867"),
+                            CreatedAt = new DateTime(2022, 11, 9, 7, 12, 44, 164, DateTimeKind.Local).AddTicks(7455),
+                            Name = "Generic Plastic Fish"
                         },
                         new
                         {
-                            Id = new Guid("f4eecdec-b74a-4a09-a1ee-bb987329ff59"),
-                            CollectionId = new Guid("ea827064-7b18-4239-9b3e-1cc9c026dc43"),
-                            CreatedAt = new DateTime(2023, 6, 2, 2, 41, 26, 435, DateTimeKind.Local).AddTicks(225),
-                            Name = "Intelligent Cotton Gloves"
+                            Id = new Guid("b9563f19-6d77-4e2a-b571-2658ac9ed01a"),
+                            CollectionId = new Guid("17cadfc1-a011-41da-9367-0d2947f88f15"),
+                            CreatedAt = new DateTime(2022, 10, 2, 10, 39, 23, 296, DateTimeKind.Local).AddTicks(4177),
+                            Name = "Incredible Concrete Chicken"
                         },
                         new
                         {
-                            Id = new Guid("97f66092-f963-4047-84e4-108a3579505b"),
-                            CollectionId = new Guid("15bcd2f5-f1d9-473c-bcf1-5206093e7ed0"),
-                            CreatedAt = new DateTime(2022, 7, 27, 12, 32, 41, 347, DateTimeKind.Local).AddTicks(9756),
-                            Name = "Intelligent Fresh Shirt"
+                            Id = new Guid("5d343bee-0770-4fdb-bfc5-03350d66ec4d"),
+                            CollectionId = new Guid("380588c3-8cec-42f2-9030-d9a7f1d9cf92"),
+                            CreatedAt = new DateTime(2022, 9, 21, 12, 6, 55, 494, DateTimeKind.Local).AddTicks(6970),
+                            Name = "Fantastic Frozen Hat"
                         },
                         new
                         {
-                            Id = new Guid("c3c22420-5e86-457c-835f-21fe9b77a6e5"),
-                            CollectionId = new Guid("e159584b-8151-4811-bbae-498a7c093595"),
-                            CreatedAt = new DateTime(2023, 1, 31, 3, 55, 33, 681, DateTimeKind.Local).AddTicks(5003),
-                            Name = "Intelligent Fresh Hat"
+                            Id = new Guid("4d9d2cf8-8c47-43af-aff1-f5848aeddc70"),
+                            CollectionId = new Guid("fba61572-e08f-48a1-a92f-a0e9cc03db69"),
+                            CreatedAt = new DateTime(2022, 10, 9, 2, 27, 18, 441, DateTimeKind.Local).AddTicks(3885),
+                            Name = "Licensed Rubber Fish"
                         });
                 });
 
@@ -455,8 +469,8 @@ namespace MyItems.Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("821fc148-61f5-494f-b616-10998cfacd64"),
-                            Email = "otabek.pro@hotmail.com",
+                            Id = new Guid("84f4c24e-908d-4524-9f90-0f15a20ae9ec"),
+                            Email = "otabek.r743@gmail.com",
                             FirstName = "Admin",
                             IsAdmin = true,
                             IsBlocked = false,
@@ -465,102 +479,102 @@ namespace MyItems.Backend.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8a65f70f-4341-431e-a85f-ace7a76d3361"),
-                            Email = "Lucia65@gmail.com",
-                            FirstName = "Lucia",
+                            Id = new Guid("bf466c09-3f00-4f16-a5cb-ff84fb7861e6"),
+                            Email = "Eunice82@yahoo.com",
+                            FirstName = "Eunice",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Predovic",
+                            LastName = "Mills",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("1c88fe6f-711c-4c95-be53-3024d95c1522"),
-                            Email = "Jill.Lesch@hotmail.com",
-                            FirstName = "Jill",
+                            Id = new Guid("0e59e516-c62a-444b-a5c3-e15a27d6055d"),
+                            Email = "Rickey.Smith51@gmail.com",
+                            FirstName = "Rickey",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Lesch",
+                            LastName = "Smith",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("a50a0c05-9a8e-4d37-a2a5-699faef074db"),
-                            Email = "Zachary73@gmail.com",
-                            FirstName = "Zachary",
+                            Id = new Guid("77873d29-1f12-4159-b8bd-0c5149f8f257"),
+                            Email = "Regina.Sporer86@hotmail.com",
+                            FirstName = "Regina",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Braun",
+                            LastName = "Sporer",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("aa33a6d5-bc0d-4b08-a0d7-62fa302a2d0a"),
-                            Email = "Julio_Schulist51@hotmail.com",
-                            FirstName = "Julio",
+                            Id = new Guid("8e347306-99ce-4d37-abb8-2bdabf353cc7"),
+                            Email = "Hope28@gmail.com",
+                            FirstName = "Hope",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Schulist",
+                            LastName = "Hettinger",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("cb7ef5b1-00f2-4e48-8524-da383a17d9c2"),
-                            Email = "Phil_Nader@yahoo.com",
-                            FirstName = "Phil",
+                            Id = new Guid("32af82e2-a45a-425b-b49d-d2b7290f47e0"),
+                            Email = "Richard_Zulauf@hotmail.com",
+                            FirstName = "Richard",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Nader",
+                            LastName = "Zulauf",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("8b44c494-ce8c-433d-b54d-e4a4451a5b61"),
-                            Email = "Gina_Friesen@yahoo.com",
-                            FirstName = "Gina",
+                            Id = new Guid("44e71406-5828-4460-af12-d5a8e26c1ba3"),
+                            Email = "Kelley_Franecki@yahoo.com",
+                            FirstName = "Kelley",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Friesen",
+                            LastName = "Franecki",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("4d9d26cc-0632-4cd6-aeb8-e2541eda0276"),
-                            Email = "Kathleen93@gmail.com",
-                            FirstName = "Kathleen",
+                            Id = new Guid("5cd547e5-3575-40b6-942a-51d32ad6b3e3"),
+                            Email = "Kathryn47@hotmail.com",
+                            FirstName = "Kathryn",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Kuvalis",
+                            LastName = "Corkery",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("59705464-8fac-4b63-8dcd-e2d355fc6371"),
-                            Email = "Lori_Kutch4@yahoo.com",
-                            FirstName = "Lori",
+                            Id = new Guid("d3d4b2e0-1c22-4d61-9ba6-586555aa136a"),
+                            Email = "Lora.Prosacco23@yahoo.com",
+                            FirstName = "Lora",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Kutch",
+                            LastName = "Prosacco",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("9ecf9876-d630-4e71-bd10-ab47d11a622d"),
-                            Email = "Maureen.Willms53@yahoo.com",
-                            FirstName = "Maureen",
+                            Id = new Guid("f896d352-27af-472b-876e-5ca6a7e90100"),
+                            Email = "Paula.Prohaska88@yahoo.com",
+                            FirstName = "Paula",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Willms",
+                            LastName = "Prohaska",
                             PasswordHash = ""
                         },
                         new
                         {
-                            Id = new Guid("10d8b4ae-f5d3-4de7-9c65-95cdf29e8f41"),
-                            Email = "Lillie.Wisozk90@yahoo.com",
-                            FirstName = "Lillie",
+                            Id = new Guid("ff4d07b3-241f-4f9f-8229-192bd1d0630d"),
+                            Email = "Luz_Runolfsdottir32@yahoo.com",
+                            FirstName = "Luz",
                             IsAdmin = false,
                             IsBlocked = false,
-                            LastName = "Wisozk",
+                            LastName = "Runolfsdottir",
                             PasswordHash = ""
                         });
                 });
@@ -591,15 +605,12 @@ namespace MyItems.Backend.Migrations
                 {
                     b.HasOne("MyItems.Backend.Models.CustomProperty", "CustomProperty")
                         .WithMany("CustomPropertyValues")
-                        .HasForeignKey("CustomPropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomPropertyId");
 
                     b.HasOne("MyItems.Backend.Models.Item", "Item")
                         .WithMany("CustomPropertyValues")
                         .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("CustomProperty");
 

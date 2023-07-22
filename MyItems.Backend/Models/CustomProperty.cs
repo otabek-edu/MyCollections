@@ -5,6 +5,7 @@ namespace MyItems.Backend.Models
     public class CustomProperty
     {
         public Guid Id { get; set; }
+        public required string Name { get; set; }
         public required string TypeProperty { get; set; }
 
         public Guid CollectionId { get; set; }

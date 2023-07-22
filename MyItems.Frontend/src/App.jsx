@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, {useEffect, useState} from 'react';
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {AuthContext} from "./Context/AuthContext.js";
+import {ThemeContext} from "./Context/ThemeContext.js";
+import Home from "./components/Pages/Home.jsx";
+import Login from "./components/Pages/Login.jsx";
+import Register from "./components/Pages/Register.jsx";
+import CollectionPage from "./components/Pages/CollectionPage.jsx";
+import ItemPage from "./components/Pages/ItemPage.jsx";
+import ProfilePage from "./components/Pages/ProfilePage.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [isAuth, setIsAuth] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    const localTheme = localStorage.getItem('theme')
+    if (localTheme === 'dark') {
+      body.setAttribute('class', 'bg-dark')
+      setTheme('dark')
+    } else {
+      body.setAttribute('class', '')
+      setTheme('light')
+    }
+
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true)
+      localStorage.getItem('isAdmin') === 'true' ? setIsAdmin(true) : setIsAdmin(false)
+    }
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <ThemeContext.Provider value={
+      {theme, setTheme, body: body}
+    }>
+      <AuthContext.Provider value={
+        {isAuth, setIsAuth, isAdmin, setIsAdmin}
+      }>
+        <div id={theme} data-bs-theme={theme} >
+          <BrowserRouter id={theme}>
+            {isAuth ?
+                <Routes>
+                  <Route path="/" element={<Home/>}  />
+                  <Route path="/collection/:id" element={<CollectionPage/>}/>
+                  <Route path="/item/:id" element={<ItemPage/>}/>
+                  <Route path="/profile/:id" element={<ProfilePage/>}/>
+                  <Route
+                      path="*"
+                      element={<Navigate to="/" replace />}
+                  />
+                </Routes>
+                :
+                <Routes>
+                  <Route path="/" element={<Home/>}  />
+                  <Route path="/collection/:id" element={<CollectionPage/>}/>
+                  <Route path="/item/:id" element={<ItemPage/>}/>
+                  <Route path="/profile/:id" element={<ProfilePage/>}/>
+                  <Route path="/login" element={<Login/>} />
+                  <Route path="/register" element={<Register/>} />
+                  <Route
+                      path="*"
+                      element={<Navigate to="/" replace />}
+                  />
+                </Routes> }
+          </BrowserRouter>
+        </div>
+      </AuthContext.Provider>
+  </ThemeContext.Provider>
+  );
+};
 
-export default App
+export default App;

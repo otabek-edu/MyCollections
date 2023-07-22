@@ -2,7 +2,8 @@
   "dependencies": {
     "mssql1": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:MyItemsDb"
+      "connectionId": "ConnectionStrings:MyItemsDb3",
+      "dynamicId": null
     }
   }
 }
