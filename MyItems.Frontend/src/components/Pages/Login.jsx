@@ -38,9 +38,13 @@ function Login() {
         localStorage.setItem("auth", "true")
         localStorage.setItem("jwt", response.data.message)
         localStorage.setItem('id', userId)
-        role === 'Admin'
-            ? setIsAdmin(true)
-            : setIsAdmin(false)
+        if(role === 'Admin'){
+          setIsAdmin(true)
+          localStorage.setItem('isAdmin', 'true')
+        } else {
+          setIsAdmin(false)
+          localStorage.setItem('isAdmin', 'false')
+        }
 
         setIsAuth(true)
       }
