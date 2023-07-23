@@ -7,12 +7,15 @@ import AdminService from "../API/admin.service.js";
 const User = ({user, users, setUsers}) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const deleteUser = (user) => {
+  const deleteUser = async (user) => {
     setIsLoading(true)
-    setTimeout(() => {
-      setUsers(users.filter(p => p.id !== user.id))
-      setIsLoading(false)
-    }, 1000)
+
+    const response = await AdminService.deleteUser(user.id)
+    if (response.success === true) {
+      await setUsers(users.filter(p => p.id !== user.id))
+    }
+
+    setIsLoading(false)
   }
 
   const setAdmin = async (user) => {

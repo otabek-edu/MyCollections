@@ -13,8 +13,26 @@ export default class AdminService {
     return response.data;
   }
 
+  static async getUserById(id) {
+    const response = await axios.get(this.url + `/api/admin/users/${id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('jwt')
+      }
+    })
+    return response.data;
+  }
+
+  static async deleteUser(id) {
+    const response = await axios.delete(this.url + `/api/admin/users/${id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('jwt')
+      }
+    })
+    return response.data;
+  }
+
   static async blockUser(id) {
-    const response = await axios.post(this.url + `/api/admin/users/block/${id}`, {
+    const response = await axios.post(this.url + `/api/admin/users/block/${id}`, {}, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('jwt')
       }
@@ -23,7 +41,7 @@ export default class AdminService {
   }
 
   static async unBlockUser(id) {
-    const response = await axios.post(this.url + `/api/Admin/users/unBlock/${id}`, {
+    const response = await axios.post(this.url + `/api/Admin/users/unBlock/${id}`,{}, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('jwt')
       }
@@ -32,7 +50,7 @@ export default class AdminService {
   }
 
   static async setAdmin(id) {
-    const response = await axios.post(this.url + `/api/admin/users/setAdmin/${id}`, {
+    const response = await axios.post(this.url + `/api/admin/users/setAdmin/${id}`,{}, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('jwt')
       }
@@ -41,7 +59,7 @@ export default class AdminService {
   }
 
   static async unSetAdmin(id) {
-    const response = await axios.post(this.url + `/api/admin/users/unSetAdmin/${id}`, {
+    const response = await axios.post(this.url + `/api/admin/users/unSetAdmin/${id}`, {},{
       headers: {
         Authorization: "Bearer " + localStorage.getItem('jwt')
       }
