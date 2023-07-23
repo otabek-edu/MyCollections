@@ -10,7 +10,7 @@ namespace MyItems.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly AdminService _adminService;
@@ -41,7 +41,7 @@ namespace MyItems.Backend.Controllers
             return Ok(result);
         }
 
-        [HttpPost("user/unBlock/{userId}")]
+        [HttpPost("users/unBlock/{userId}")]
         public async Task<IActionResult> UnBlockUser(Guid userId)
         {
             var result = await _adminService.UnBlockUser(userId);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyItems.Backend.Models;
 using MyItems.Backend.Results;
+using MyItems.Backend.ViewModel;
 
 namespace MyItems.Backend.Services
 {
@@ -15,16 +16,35 @@ namespace MyItems.Backend.Services
 
         public async Task<Result> GetAllUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            return new SuccessDataResult<List<User>>(users);
+            var users = await _context.Users
+                .Select(u => new UserViewModel
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    IsAdmin = u.IsAdmin,
+                    IsBlocked = u.IsBlocked
+                })
+                .ToListAsync();
+
+            return new SuccessDataResult<List<UserViewModel>>(users);
         }
 
         public async Task<Result> GetUserById(Guid userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users
+                .Select(u => new UserViewModel
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                })
+                .FirstOrDefaultAsync(u => u.Id == userId);
             if (user is null)
                 return new ErrorResult("User not found");
-            return new SuccessDataResult<User>(user);
+            return new SuccessDataResult<UserViewModel>(user);
         }
 
         public async Task<Result> BlockUser(Guid id)
