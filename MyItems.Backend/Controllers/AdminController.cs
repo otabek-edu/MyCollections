@@ -41,7 +41,7 @@ namespace MyItems.Backend.Controllers
             return Ok(result);
         }
 
-        [HttpPost("user/unBlock/{userId}")]
+        [HttpPost("users/unBlock/{userId}")]
         public async Task<IActionResult> UnBlockUser(Guid userId)
         {
             var result = await _adminService.UnBlockUser(userId);
